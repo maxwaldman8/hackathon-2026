@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://di6fgrf2ufjne"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Grid" type="TileMapLayer" parent="."]
