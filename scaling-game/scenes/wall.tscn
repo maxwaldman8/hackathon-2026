@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dndc1xesouvj7"]
+[gd_scene load_steps=0 format=3 uid="uid://dndc1xesouvj7"]
 
 [node name="Wall" type="ColorRect"]
 custom_minimum_size = Vector2(1, 1)
