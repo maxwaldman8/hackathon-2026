@@ -5,9 +5,6 @@ extends Node2D
 @onready var grid : TileMapLayer = $Grid
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
-@export var player: Player
-@onready var grid: TileMapLayer = $Grid
-@export var level_bounds: Rect2i = Rect2i(0, 0, 0, 0)
 
 func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_source_id(coords) != -1
