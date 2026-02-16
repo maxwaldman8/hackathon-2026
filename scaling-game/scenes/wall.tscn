@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dndc1xesouvj7"]
+
+[node name="Wall" type="ColorRect"]
+custom_minimum_size = Vector2(1, 1)
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
