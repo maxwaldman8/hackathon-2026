@@ -5,25 +5,41 @@ extends Node2D
 @onready var grid : TileMapLayer = $Grid
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
+var boxes: Array[Vector2i] = []
 
 func has_wall(coords: Vector2i) -> bool:
-	print(grid.get_cell_source_id(coords))
-	return grid.get_cell_source_id(coords) == 0
+	return grid.get_cell_alternative_tile(coords) == 1
 
+func has_box(coords: Vector2i) -> bool:
+	return grid.get_cell_alternative_tile(coords) == 2
 
 func is_invalid(coords: Vector2i) -> bool:
 	return has_wall(coords) or !level_bounds.has_point(coords)
-
 
 func _input(event):
 	if (event.is_action_pressed("up")):
 		var y: int = player.bounds.position.y
 		var stopped: bool = false
+		var pushed_boxes: Array[Vector2i] = []
 		while !stopped:
 			y -= 1
 			for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.append(Vector2i(x, y))
+			for box in pushed_boxes:
+				if is_invalid(Vector2i(box.x, box.y - 1)):
+					stopped = true
+					break
+				if has_box(Vector2i(box.x, box.y - 1)):
+					pushed_boxes.append(Vector2i(box.x, box.y - 1))
+			if !stopped:
+				for box in pushed_boxes:
+					box.y -= 1
+					grid.set_cell(Vector2i(box.x, box.y + 1), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		y += 1
 		if (y == player.bounds.position.y):
 			player.scale_bounds("up", "contract", player.bounds.size.y - 1)
@@ -32,11 +48,26 @@ func _input(event):
 	if (event.is_action_pressed("left")):
 		var x: int = player.bounds.position.x
 		var stopped: bool = false
+		var pushed_boxes: Array[Vector2i] = []
 		while !stopped:
 			x -= 1
 			for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.append(Vector2i(x, y))
+			for box in pushed_boxes:
+				if is_invalid(Vector2i(box.x - 1, box.y)):
+					stopped = true
+					break
+				if has_box(Vector2i(box.x - 1, box.y)):
+					pushed_boxes.append(Vector2i(box.x - 1, box.y))
+			if !stopped:
+				for box in pushed_boxes:
+					box.x -= 1
+					grid.set_cell(Vector2i(box.x + 1, box.y), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		x += 1
 		if (x == player.bounds.position.x):
 			player.scale_bounds("left", "contract", player.bounds.size.x - 1)
@@ -45,11 +76,26 @@ func _input(event):
 	if (event.is_action_pressed("right")):
 		var x: int = player.bounds.position.x + player.bounds.size.x - 1
 		var stopped: bool = false
+		var pushed_boxes: Array[Vector2i] = []
 		while !stopped:
 			x += 1
 			for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.append(Vector2i(x, y))
+			for box in pushed_boxes:
+				if is_invalid(Vector2i(box.x + 1, box.y)):
+					stopped = true
+					break
+				if has_box(Vector2i(box.x + 1, box.y)):
+					pushed_boxes.append(Vector2i(box.x + 1, box.y))
+			if !stopped:
+				for box in pushed_boxes:
+					box.x += 1
+					grid.set_cell(Vector2i(box.x - 1, box.y), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		x -= 1
 		if (x == player.bounds.position.x + player.bounds.size.x - 1):
 			player.scale_bounds("right", "contract", player.bounds.size.x - 1)
@@ -58,11 +104,26 @@ func _input(event):
 	if (event.is_action_pressed("down")):
 		var y: int = player.bounds.position.y + player.bounds.size.y - 1
 		var stopped: bool = false
+		var pushed_boxes: Array[Vector2i] = []
 		while !stopped:
 			y += 1
 			for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+						pushed_boxes.append(Vector2i(x, y))
+			for box in pushed_boxes:
+				if is_invalid(Vector2i(box.x, box.y + 1)):
+					stopped = true
+					break
+				if has_box(Vector2i(box.x, box.y + 1)):
+					pushed_boxes.append(Vector2i(box.x, box.y + 1))
+			if !stopped:
+				for box in pushed_boxes:
+					box.y += 1
+					grid.set_cell(Vector2i(box.x, box.y - 1), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		y -= 1
 		if (y == player.bounds.position.y + player.bounds.size.y - 1):
 			player.scale_bounds("down", "contract", player.bounds.size.y - 1)

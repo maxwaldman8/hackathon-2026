@@ -1,13 +1,41 @@
 [gd_scene format=3 uid="uid://di6fgrf2ufjne"]
 
 [ext_resource type="Script" uid="uid://7oh5jn0m8563" path="res://scripts/level.gd" id="1_2q6dc"]
-[ext_resource type="PackedScene" uid="uid://dy8pgw30ld24s" path="res://scenes/grid.tscn" id="2_w8frs"]
+[ext_resource type="PackedScene" uid="uid://dndc1xesouvj7" path="res://scenes/wall.tscn" id="2_w8frs"]
+[ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="3_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://5oi8emxl0rfu" path="res://scenes/player.tscn" id="3_w8frs"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ppgk2"]
+scenes/1/scene = ExtResource("2_w8frs")
+scenes/2/scene = ExtResource("3_mx8sn")
+
+[sub_resource type="TileSet" id="TileSet_2r41h"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_ppgk2")
+
+[sub_resource type="GDScript" id="GDScript_w7c3h"]
+script/source = "extends TileMapLayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="Level" type="Node2D" unique_id=854432131 node_paths=PackedStringArray("player")]
 script = ExtResource("1_2q6dc")
 player = NodePath("Player")
 level_bounds = Rect2i(0, 0, 100, 100)
+
+[node name="Grid" type="TileMapLayer" parent="." unique_id=987756292]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAFAAEAAAAAAAAAAQAFAAIAAAAAAAAAAQAFAAMAAAAAAAAAAQAFAAQAAAAAAAAAAQAFAAUAAAAAAAAAAQAEAAUAAAAAAAAAAQADAAUAAAAAAAAAAQACAAUAAAAAAAAAAQABAAUAAAAAAAAAAQAAAAUAAAAAAAAAAQAAAAQAAAAAAAAAAQAAAAMAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAMAAAAAAAAAAgA=")
+tile_set = SubResource("TileSet_2r41h")
+script = SubResource("GDScript_w7c3h")
 
 [node name="Player" parent="." unique_id=465425349 node_paths=PackedStringArray("level") instance=ExtResource("3_w8frs")]
 position = Vector2(64, 256)

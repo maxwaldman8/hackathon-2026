@@ -14,7 +14,6 @@ func _process(_delta: float) -> void:
 	position = bounds.position * grid.tile_set.tile_size
 	scale = bounds.size
 
-
 func scale_bounds(direction:String, type:String, amount:int):
 	match direction:
 		"left" when type == "expand":
