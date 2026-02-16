@@ -33,4 +33,6 @@ tile_map_data = PackedByteArray("AAD9//3/AAAAAAAAAQD+//3/AAAAAAAAAQD///3/AAAAAAA
 tile_set = SubResource("TileSet_2r41h")
 script = SubResource("GDScript_w7c3h")
 
-[node name="Player" parent="." unique_id=465425349 instance=ExtResource("3_w8frs")]
+[node name="Player" parent="." unique_id=465425349 node_paths=PackedStringArray("level") instance=ExtResource("3_w8frs")]
+position = Vector2(362, 92)
+level = NodePath("..")
