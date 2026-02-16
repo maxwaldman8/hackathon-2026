@@ -27,9 +27,31 @@ func _input(event):
 		else:
 			player.scale("up", "expand", abs(player.bounds.position.y - y))
 	if (event.is_action_pressed("left")):
-		pass
+		var x: int = player.bounds.position.x
+		var stopped: bool = false
+		while !stopped:
+			x -= 1
+			for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+		x += 1
+		if (x == player.bounds.position.x):
+			player.scale("left", "contract", player.bounds.size.x - 1)
+		else:
+			player.scale("left", "expand", abs(player.bounds.position.x - x))
 	if (event.is_action_pressed("right")):
-		pass
+		var x: int = player.bounds.position.x + player.bounds.size.x
+		var stopped: bool = false
+		while !stopped:
+			x += 1
+			for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+		x -= 1
+		if (x == player.bounds.position.x + player.bounds.size.x):
+			player.scale("right", "contract", player.bounds.size.x - 1)
+		else:
+			player.scale("right", "expand", abs(player.bounds.position.x + player.bounds.size.x - x))
 	if (event.is_action_pressed("down")):
 		var y: int = player.bounds.position.y + player.bounds.size.y
 		var stopped: bool = false
