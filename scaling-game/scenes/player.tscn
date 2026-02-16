@@ -14,8 +14,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-[node name="Player" type="CharacterBody2D" unique_id=442314844]
-script = ExtResource("1_3vyb7")
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=200729450]
 offset_left = -3.0
@@ -25,5 +23,4 @@ offset_bottom = 3.0
 color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1852614450]
-position = Vector2(-0.25, 0)
 shape = SubResource("RectangleShape2D_u8vuu")
