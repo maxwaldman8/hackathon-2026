@@ -148,9 +148,8 @@ func _input(event):
 			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - y))
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
-
-func _process(delta: float) -> void:
-	_check_finished()
+	#if _check_finished():
+		#pass
 
 func _check_finished():
 	print(targets_bounds == player.bounds)
