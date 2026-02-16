@@ -1,12 +1,14 @@
 class_name Level
 extends Node2D
 
+@export var is_main : bool
 @export var player : Player
 @onready var grid : TileMapLayer = $Grid
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
 var boxes: Array[Vector2i] = []
 var targets_bounds : Rect2i
+var is_done : bool = false
 
 func _ready() -> void:
 	var used = grid.get_used_cells()
@@ -152,8 +154,12 @@ func _input(event):
 			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - y))
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
-	#if _check_finished():
-		#pass
+	if _check_finished() and not is_done:
+		is_done = true
+		if is_main:
+			SceneManager.load_new_scene("res://scenes/levels/level" + str(1) + ".tscn", "fade_to_black")
+		else:
+			SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
 
 func _check_finished():
-	print(targets_bounds == player.bounds)
+	return targets_bounds == player.bounds

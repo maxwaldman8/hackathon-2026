@@ -6,6 +6,7 @@
 
 [node name="MainLevel" type="Node2D" unique_id=1418454543 node_paths=PackedStringArray("player")]
 script = ExtResource("1_6we3w")
+is_main = true
 player = NodePath("Player")
 level_bounds = Rect2i(0, 0, 100, 100)
 

@@ -1,3 +1,0 @@
-fancy
------
-sfvdbijs
