@@ -84,8 +84,8 @@ func _input(event):
 			if !stopped:
 				pushed_boxes.reverse()
 				for i in range(0, pushed_boxes.size()):
-					pushed_boxes[i].y -= 1
-					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					pushed_boxes[i].x -= 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x + 1, pushed_boxes[i].y), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		x += 1
 		if x == player.bounds.position.x:
@@ -113,8 +113,8 @@ func _input(event):
 			if !stopped:
 				pushed_boxes.reverse()
 				for i in range(0, pushed_boxes.size()):
-					pushed_boxes[i].y -= 1
-					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					pushed_boxes[i].x += 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x - 1, pushed_boxes[i].y), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		x -= 1
 		if x == player.bounds.position.x + player.bounds.size.x - 1:
@@ -142,8 +142,8 @@ func _input(event):
 			if !stopped:
 				pushed_boxes.reverse()
 				for i in range(0, pushed_boxes.size()):
-					pushed_boxes[i].y -= 1
-					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					pushed_boxes[i].y += 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y - 1), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		y -= 1
 		if y == player.bounds.position.y + player.bounds.size.y - 1:
