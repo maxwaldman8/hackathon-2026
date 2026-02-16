@@ -7,7 +7,8 @@ extends Node2D
 
 
 func has_wall(coords: Vector2i) -> bool:
-	return grid.get_cell_source_id(coords) != -1
+	print(grid.get_cell_source_id(coords))
+	return grid.get_cell_source_id(coords) == 0
 
 
 func is_invalid(coords: Vector2i) -> bool:
@@ -25,9 +26,9 @@ func _input(event):
 					stopped = true
 		y += 1
 		if (y == player.bounds.position.y):
-			player.scale("up", "contract", player.bounds.size.y - 1)
+			player.scale_bounds("up", "contract", player.bounds.size.y - 1)
 		else:
-			player.scale("up", "expand", abs(player.bounds.position.y - y))
+			player.scale_bounds("up", "expand", abs(player.bounds.position.y - y))
 	if (event.is_action_pressed("left")):
 		var x: int = player.bounds.position.x
 		var stopped: bool = false
@@ -38,21 +39,21 @@ func _input(event):
 					stopped = true
 		x += 1
 		if (x == player.bounds.position.x):
-			player.scale("left", "contract", player.bounds.size.x - 1)
+			player.scale_bounds("left", "contract", player.bounds.size.x - 1)
 		else:
-			player.scale("left", "expand", abs(player.bounds.position.x - x))
+			player.scale_bounds("left", "expand", abs(player.bounds.position.x - x))
 		## Contract case: against wall
 		#if player.bounds.position.x == level_bounds.position.x:
-			#player.scale("left", "contract", level_bounds.position.x - player.bounds.size.x)
+			#player.scale_bounds("left", "contract", level_bounds.position.x - player.bounds.size.x)
 			#return
 		## Expand case: Check for walls
 		#var shift_amount : int = 1
 		#var newPlayerPosition = Vector2(player.bounds.position.x - shift_amount, player.bounds.position.y)
 		#while not is_invalid(newPlayerPosition):
 			#shift_amount += 1
-		#player.scale("left", "expand", shift_amount - 1)
+		#player.scale_bounds("left", "expand", shift_amount - 1)
 	if (event.is_action_pressed("right")):
-		var x: int = player.bounds.position.x + player.bounds.size.x
+		var x: int = player.bounds.position.x + player.bounds.size.x - 1
 		var stopped: bool = false
 		while !stopped:
 			x += 1
@@ -60,12 +61,12 @@ func _input(event):
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
 		x -= 1
-		if (x == player.bounds.position.x + player.bounds.size.x):
-			player.scale("right", "contract", player.bounds.size.x - 1)
+		if (x == player.bounds.position.x + player.bounds.size.x - 1):
+			player.scale_bounds("right", "contract", player.bounds.size.x - 1)
 		else:
-			player.scale("right", "expand", abs(player.bounds.position.x + player.bounds.size.x - x))
+			player.scale_bounds("right", "expand", abs(player.bounds.position.x + player.bounds.size.x - 1 - x))
 	if (event.is_action_pressed("down")):
-		var y: int = player.bounds.position.y + player.bounds.size.y
+		var y: int = player.bounds.position.y + player.bounds.size.y - 1
 		var stopped: bool = false
 		while !stopped:
 			y += 1
@@ -73,7 +74,7 @@ func _input(event):
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
 		y -= 1
-		if (y == player.bounds.position.y + player.bounds.size.y):
-			player.scale("down", "contract", player.bounds.size.y - 1)
+		if (y == player.bounds.position.y + player.bounds.size.y - 1):
+			player.scale_bounds("down", "contract", player.bounds.size.y - 1)
 		else:
-			player.scale("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - y))
+			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - y))

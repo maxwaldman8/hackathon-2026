@@ -1,18 +1,13 @@
 class_name Player
-extends CharacterBody2D
-
+extends Node2D
 
 @export var level : Level
-@onready var color_rect = $ColorRect
 
-var bounds : Rect2i
-var grid : TileMapLayer
-
+@onready var grid : TileMapLayer = level.get_node("Grid")
+@onready var bounds : Rect2i = Rect2i(Vector2i(position / Vector2(grid.tile_set.tile_size)), scale)
 
 func _ready() -> void:
-	bounds = Rect2i(Vector2i(0, 0), Vector2i(1, 1))
-	grid = level.get_node("Grid")
-	print(grid)
+	pass
 	#await get_tree().create_timer(0.5).timeout
 	#scale("right", "expand", 150)
 	#await get_tree().create_timer(0.5).timeout
@@ -22,10 +17,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	color_rect.size = bounds.size * grid.tile_set.tile_size
+	position = bounds.position * grid.tile_set.tile_size
+	scale = bounds.size
+	print(bounds)
+	print(position)
+	print(scale)
 
-
-func scale(direction:String, type:String, amount:int):
+func scale_bounds(direction:String, type:String, amount:int):
 	match direction:
 		"left" when type == "expand":
 			bounds.position.x -= amount
