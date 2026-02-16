@@ -26,7 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=200729450]
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=404161467]
 offset_left = -3.0
 offset_top = -4.0
 offset_right = 3.0
@@ -34,6 +33,5 @@ offset_bottom = 3.0
 color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1852614450]
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1191330297]
 position = Vector2(-0.25, 0)
 shape = SubResource("RectangleShape2D_u8vuu")
