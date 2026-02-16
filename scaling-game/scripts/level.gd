@@ -6,6 +6,10 @@ extends Node2D
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
 var boxes: Array[Vector2i] = []
+var targets : Array[Vector2i] = []
+
+func _ready() -> void:
+	pass
 
 func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_alternative_tile(coords) == 1

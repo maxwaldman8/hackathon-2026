@@ -1,11 +1,13 @@
 [gd_scene format=4 uid="uid://d3ohocbnhd2fo"]
 
 [ext_resource type="PackedScene" uid="uid://dndc1xesouvj7" path="res://scenes/wall.tscn" id="1_t5fjg"]
-[ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="2_w88cy"]
+[ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="2_2s7k2"]
+[ext_resource type="PackedScene" uid="uid://bd1i5crrj7luh" path="res://scenes/target.tscn" id="3_gnlqp"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_w8frs"]
 scenes/1/scene = ExtResource("1_t5fjg")
-scenes/2/scene = ExtResource("2_w88cy")
+scenes/2/scene = ExtResource("2_2s7k2")
+scenes/3/scene = ExtResource("3_gnlqp")
 
 [sub_resource type="TileSet" id="TileSet_2r41h"]
 tile_size = Vector2i(64, 64)
