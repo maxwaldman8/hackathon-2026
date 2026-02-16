@@ -41,16 +41,16 @@ func _input(event):
 			player.scale("left", "contract", player.bounds.size.x - 1)
 		else:
 			player.scale("left", "expand", abs(player.bounds.position.x - x))
-		# Contract case: against wall
-		if player.bounds.position.x == level_bounds.position.x:
-			player.scale("left", "contract", level_bounds.position.x - player.bounds.size.x)
-			return
-		# Expand case: Check for walls
-		var shift_amount : int = 1
-		var newPlayerPosition = Vector2(player.bounds.position.x - shift_amount, player.bounds.position.y)
-		while not is_invalid(newPlayerPosition):
-			shift_amount += 1
-		player.scale("left", "expand", shift_amount - 1)
+		## Contract case: against wall
+		#if player.bounds.position.x == level_bounds.position.x:
+			#player.scale("left", "contract", level_bounds.position.x - player.bounds.size.x)
+			#return
+		## Expand case: Check for walls
+		#var shift_amount : int = 1
+		#var newPlayerPosition = Vector2(player.bounds.position.x - shift_amount, player.bounds.position.y)
+		#while not is_invalid(newPlayerPosition):
+			#shift_amount += 1
+		#player.scale("left", "expand", shift_amount - 1)
 	if (event.is_action_pressed("right")):
 		var x: int = player.bounds.position.x + player.bounds.size.x
 		var stopped: bool = false
