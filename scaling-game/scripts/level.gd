@@ -14,7 +14,19 @@ func is_invalid(coords: Vector2i) -> bool:
 
 func _input(event):
 	if (event.is_action_pressed("up")):
-		for x in range(player.position.x, player.position.x + player.)
+		var y: int = player.bounds.position.x
+		var stopped: bool = false
+		while !stopped:
+			y -= 1
+			for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+		y += 1
+		if (y == player.bounds.position.x):
+			# shrink
+			pass
+		else:
+			pass
 		pass
 	if (event.is_action_pressed("left")):
 		pass
