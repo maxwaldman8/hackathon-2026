@@ -17,14 +17,6 @@ anchor_bottom = 0.5
 [node name="Player" type="CharacterBody2D" unique_id=442314844]
 script = ExtResource("1_3vyb7")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=321831256]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=200729450]
 offset_left = -3.0
 offset_top = -4.0
