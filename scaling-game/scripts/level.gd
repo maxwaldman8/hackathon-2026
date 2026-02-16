@@ -17,7 +17,7 @@ func is_invalid(coords: Vector2i) -> bool:
 	return has_wall(coords) or !level_bounds.has_point(coords)
 
 func _input(event):
-	if (event.is_action_pressed("up")):
+	if event.is_action_pressed("up"):
 		var y: int = player.bounds.position.y
 		var stopped: bool = false
 		var pushed_boxes: Array[Vector2i] = []
@@ -41,11 +41,11 @@ func _input(event):
 					grid.set_cell(Vector2i(box.x, box.y + 1), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		y += 1
-		if (y == player.bounds.position.y):
+		if y == player.bounds.position.y:
 			player.scale_bounds("up", "contract", player.bounds.size.y - 1)
 		else:
 			player.scale_bounds("up", "expand", abs(player.bounds.position.y - y))
-	if (event.is_action_pressed("left")):
+	if event.is_action_pressed("left"):
 		var x: int = player.bounds.position.x
 		var stopped: bool = false
 		var pushed_boxes: Array[Vector2i] = []
@@ -69,11 +69,11 @@ func _input(event):
 					grid.set_cell(Vector2i(box.x + 1, box.y), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		x += 1
-		if (x == player.bounds.position.x):
+		if x == player.bounds.position.x:
 			player.scale_bounds("left", "contract", player.bounds.size.x - 1)
 		else:
 			player.scale_bounds("left", "expand", abs(player.bounds.position.x - x))
-	if (event.is_action_pressed("right")):
+	if event.is_action_pressed("right"):
 		var x: int = player.bounds.position.x + player.bounds.size.x - 1
 		var stopped: bool = false
 		var pushed_boxes: Array[Vector2i] = []
@@ -97,11 +97,11 @@ func _input(event):
 					grid.set_cell(Vector2i(box.x - 1, box.y), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		x -= 1
-		if (x == player.bounds.position.x + player.bounds.size.x - 1):
+		if x == player.bounds.position.x + player.bounds.size.x - 1:
 			player.scale_bounds("right", "contract", player.bounds.size.x - 1)
 		else:
 			player.scale_bounds("right", "expand", abs(player.bounds.position.x + player.bounds.size.x - 1 - x))
-	if (event.is_action_pressed("down")):
+	if event.is_action_pressed("down"):
 		var y: int = player.bounds.position.y + player.bounds.size.y - 1
 		var stopped: bool = false
 		var pushed_boxes: Array[Vector2i] = []
@@ -125,7 +125,9 @@ func _input(event):
 					grid.set_cell(Vector2i(box.x, box.y - 1), -1, Vector2i(0, 0), 0)
 					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
 		y -= 1
-		if (y == player.bounds.position.y + player.bounds.size.y - 1):
+		if y == player.bounds.position.y + player.bounds.size.y - 1:
 			player.scale_bounds("down", "contract", player.bounds.size.y - 1)
 		else:
 			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - y))
+	if event.is_action_pressed("reset"):
+		get_tree().reload_current_scene()
