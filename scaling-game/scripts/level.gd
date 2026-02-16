@@ -53,10 +53,11 @@ func _input(event):
 				if has_box(Vector2i(box.x, box.y - 1)):
 					pushed_boxes.append(Vector2i(box.x, box.y - 1))
 			if !stopped:
-				for box in pushed_boxes:
-					box.y -= 1
-					grid.set_cell(Vector2i(box.x, box.y + 1), -1, Vector2i(0, 0), 0)
-					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
+				pushed_boxes.reverse()
+				for i in range(0, pushed_boxes.size()):
+					pushed_boxes[i].y -= 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		y += 1
 		if y == player.bounds.position.y:
 			player.scale_bounds("up", "contract", player.bounds.size.y - 1)
@@ -81,10 +82,11 @@ func _input(event):
 				if has_box(Vector2i(box.x - 1, box.y)):
 					pushed_boxes.append(Vector2i(box.x - 1, box.y))
 			if !stopped:
-				for box in pushed_boxes:
-					box.x -= 1
-					grid.set_cell(Vector2i(box.x + 1, box.y), -1, Vector2i(0, 0), 0)
-					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
+				pushed_boxes.reverse()
+				for i in range(0, pushed_boxes.size()):
+					pushed_boxes[i].y -= 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		x += 1
 		if x == player.bounds.position.x:
 			player.scale_bounds("left", "contract", player.bounds.size.x - 1)
@@ -109,10 +111,11 @@ func _input(event):
 				if has_box(Vector2i(box.x + 1, box.y)):
 					pushed_boxes.append(Vector2i(box.x + 1, box.y))
 			if !stopped:
-				for box in pushed_boxes:
-					box.x += 1
-					grid.set_cell(Vector2i(box.x - 1, box.y), -1, Vector2i(0, 0), 0)
-					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
+				pushed_boxes.reverse()
+				for i in range(0, pushed_boxes.size()):
+					pushed_boxes[i].y -= 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		x -= 1
 		if x == player.bounds.position.x + player.bounds.size.x - 1:
 			player.scale_bounds("right", "contract", player.bounds.size.x - 1)
@@ -137,10 +140,11 @@ func _input(event):
 				if has_box(Vector2i(box.x, box.y + 1)):
 					pushed_boxes.append(Vector2i(box.x, box.y + 1))
 			if !stopped:
-				for box in pushed_boxes:
-					box.y += 1
-					grid.set_cell(Vector2i(box.x, box.y - 1), -1, Vector2i(0, 0), 0)
-					grid.set_cell(Vector2i(box.x, box.y), 0, Vector2i(0, 0), 2)
+				pushed_boxes.reverse()
+				for i in range(0, pushed_boxes.size()):
+					pushed_boxes[i].y -= 1
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
+					grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 		y -= 1
 		if y == player.bounds.position.y + player.bounds.size.y - 1:
 			player.scale_bounds("down", "contract", player.bounds.size.y - 1)
