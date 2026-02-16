@@ -6,10 +6,23 @@ extends Node2D
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
 var boxes: Array[Vector2i] = []
-var targets : Array[Vector2i] = []
+var targets_bounds : Rect2i
 
 func _ready() -> void:
-	pass
+	var used = grid.get_used_cells()
+	var min_x : int = 1000
+	var min_y : int = 1000
+	var max_x : int = -1
+	var max_y : int = -1
+	for tile in used:
+		if grid.get_cell_alternative_tile(tile) != 3:
+			continue
+		min_x = min(min_x, tile.x)
+		min_y = min(min_y, tile.y)
+		max_x = max(max_x, tile.x)
+		max_y = max(max_y, tile.y)
+	targets_bounds = Rect2i(min_x, min_y, max_x - min_x + 1, max_y - min_y + 1)
+	print(targets_bounds)
 
 func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_alternative_tile(coords) == 1
@@ -135,3 +148,9 @@ func _input(event):
 			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - y))
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
+
+func _process(delta: float) -> void:
+	_check_finished()
+
+func _check_finished():
+	print(targets_bounds == player.bounds)

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d25ssfwkly2b1" path="res://icon.svg" id="2_g2els"]
 
 [node name="Player" type="Node2D" unique_id=1501448831]
+top_level = true
 script = ExtResource("1_3vyb7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1811824797]

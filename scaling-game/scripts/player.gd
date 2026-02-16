@@ -36,3 +36,4 @@ func scale_bounds(direction:String, type:String, amount:int):
 		"down" when type == "contract":
 			bounds.position.y += amount
 			bounds.size.y = 1
+	print(bounds)
