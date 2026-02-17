@@ -35,6 +35,20 @@ func _ready() -> void:
 	for item in finished_levels:
 		item.visible = false
 	
+	if is_main:
+		if SavedLevelInfo.solved_levels.find(9) != -1 or SavedLevelInfo.solved_levels.find(10) != -1:
+			Music.get_node("AudioStreamPlayer2D").stream = load("res://assets/music/Hub Music 3.wav")
+		elif SavedLevelInfo.solved_levels.find(5) != -1 or SavedLevelInfo.solved_levels.find(6) != -1:
+			Music.get_node("AudioStreamPlayer2D").stream = load("res://assets/music/Hub Music 2.wav")
+		else:
+			Music.get_node("AudioStreamPlayer2D").stream = load("res://assets/music/Hub Music 1.wav")
+		Music.get_node("AudioStreamPlayer2D").volume_db = 18
+	else:
+		if Music.get_node("AudioStreamPlayer2D").stream.resource_path != "res://assets/music/Blueprints.wav":
+			Music.get_node("AudioStreamPlayer2D").stream = load("res://assets/music/Blueprints.wav")
+			Music.get_node("AudioStreamPlayer2D").volume_db = 0
+	if !Music.get_node("AudioStreamPlayer2D").playing:
+		Music.get_node("AudioStreamPlayer2D").play()
 	# Future floodfill for target collection
 	var used = grid.get_used_cells()
 	var new_used = []
@@ -311,7 +325,7 @@ func _input(event):
 			player.scale_bounds("down", "contract", player.bounds.size.y - 1)
 		else:
 			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - min_y))
-	if event.is_action_pressed("reset"):
+	if event.is_action_pressed("reset") and !is_main:
 		get_tree().reload_current_scene()
 	is_done = _check_finished()
 	if is_main:

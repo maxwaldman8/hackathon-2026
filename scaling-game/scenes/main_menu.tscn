@@ -67,3 +67,5 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "QUIT"
+
+[connection signal="pressed" from="Buttons/Play Button" to="." method="_on_play_button_pressed"]
