@@ -10,6 +10,7 @@ extends Node2D
 var target_bounds : Dictionary
 var is_done : bool = false
 var level_labels : Array[Node]
+var finished_levels : Array[Node]
 var disabled : bool = false
 
 const DIRECTIONS : Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
@@ -19,11 +20,14 @@ func _ready_labels():
 	if not is_main:
 		return
 	level_labels = $LevelEnterLabels.get_children()
+	finished_levels = $FinishedLevels.get_children()
 	for label in level_labels:
 		label.visible = false
 
 func _ready() -> void:
 	_ready_labels()
+	for item in finished_levels:
+		item.visible = false
 	
 	# Future floodfill for target collection
 	var used = grid.get_used_cells()
@@ -52,7 +56,9 @@ func _ready() -> void:
 		
 		if level_num_tag in SavedLevelInfo.solved_levels:
 			for tile in checked:
-				grid.set_cell(tile, 1)
+				grid.set_cell(tile, 3, Vector2i(0, 0), 1)
+			grid.update_internals()
+			finished_levels[level_num_tag - 1].visible = true
 		
 		# Converting group to rect
 		var min_x : int = 1000
@@ -68,21 +74,25 @@ func _ready() -> void:
 		
 		# Checking for quitting level
 		if SavedLevelInfo.did_just_quit_level[0]:
+			# Position to level
 			pass
 		
 		target_bounds[group] = level_num_tag
+		SavedLevelInfo.did_just_quit_level = [false, 0]
 
 func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_alternative_tile(coords) == 1
 
 func has_box(coords: Vector2i) -> bool:
 	for box in boxes:
+		@warning_ignore("integer_division")
 		if Vector2i(box.position) / grid.tile_set.tile_size == coords:
 			return true
 	return false
 
 func get_box_at_pos(coords: Vector2i) -> Box:
 	for box in boxes:
+		@warning_ignore("integer_division")
 		if Vector2i(box.position) / grid.tile_set.tile_size == coords:
 			return box
 	return null
@@ -297,7 +307,11 @@ func _input(event):
 		get_tree().reload_current_scene()
 	is_done = _check_finished()
 	if is_main:
-		level_labels[0].visible = is_done
+		if is_done:
+			level_labels[target_bounds[player.bounds] - 1].visible = true
+		else:
+			for label in level_labels:
+				label.visible = false
 	if not is_main and is_done:
 		SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
 		disabled = true
