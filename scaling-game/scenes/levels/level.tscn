@@ -1,7 +1,7 @@
-[gd_scene format=4 uid="uid://c1i674pey1ia7"]
+[gd_scene format=4 uid="uid://i5cyx363nsq6"]
 
 [ext_resource type="Script" uid="uid://7oh5jn0m8563" path="res://scripts/level.gd" id="1_b2cq8"]
-[ext_resource type="Texture2D" uid="uid://0gn5uc02a8lh" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_urvlt"]
+[ext_resource type="Texture2D" uid="uid://bfdborgmtbh3" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_urvlt"]
 [ext_resource type="PackedScene" uid="uid://5oi8emxl0rfu" path="res://scenes/player.tscn" id="2_xb4v1"]
 [ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="3_urvlt"]
 [ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="5_urvlt"]
