@@ -9,8 +9,20 @@ extends Node2D
 var boxes: Array[Vector2i] = []
 var targets_bounds : Rect2i
 var is_done : bool = false
+var level_labels : Array[Node]
+var disabled : bool = false
+
+func _ready_labels():
+	if not is_main:
+		return
+	level_labels = $LevelEnterLabels.get_children()
+	for label in level_labels:
+		label.visible = false
 
 func _ready() -> void:
+	_ready_labels()
+		
+	# Future floodfill for target collection
 	var used = grid.get_used_cells()
 	var min_x : int = 1000
 	var min_y : int = 1000
@@ -35,6 +47,8 @@ func is_invalid(coords: Vector2i) -> bool:
 	return has_wall(coords) or !level_bounds.has_point(coords)
 
 func _input(event):
+	if disabled:
+		return
 	if event.is_action_pressed("up"):
 		var max_y: int = -1
 		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
@@ -213,12 +227,19 @@ func _input(event):
 			player.scale_bounds("down", "expand", abs(player.bounds.position.y + player.bounds.size.y - 1 - min_y))
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
-	if _check_finished() and not is_done:
-		is_done = true
-		if is_main:
-			SceneManager.load_new_scene("res://scenes/levels/level" + str(1) + ".tscn", "fade_to_black")
-		else:
+	is_done = _check_finished()
+	if is_main:
+		level_labels[0].visible = is_done
+	if not is_main and is_done:
+		SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
+		disabled = true
+	if event.is_action_pressed("enter"):
+		if not is_main and not is_done:
 			SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
+			disabled = true
+		elif is_main and is_done:
+			SceneManager.load_new_scene("res://scenes/levels/level" + str(1) + ".tscn", "fade_to_black")
+			disabled = true
 
 func _check_finished():
 	return targets_bounds == player.bounds
