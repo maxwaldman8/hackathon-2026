@@ -5,11 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://5oi8emxl0rfu" path="res://scenes/player.tscn" id="2_xb4v1"]
 [ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="3_urvlt"]
 [ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="5_urvlt"]
+[ext_resource type="AudioStream" uid="uid://bhcqn20te1d1f" path="res://assets/music/Blueprints.wav" id="6_d4w6o"]
 
 [node name="Level3" type="Node2D" unique_id=854432131 node_paths=PackedStringArray("player")]
 script = ExtResource("1_b2cq8")
-level_bounds = Rect2i(0, 0, 100, 100)
 player = NodePath("Player")
+level_bounds = Rect2i(0, 0, 100, 100)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1142227974]
+stream = ExtResource("6_d4w6o")
+autoplay = true
 
 [node name="Background" type="TextureRect" parent="." unique_id=1021887973]
 offset_right = 1024.0
