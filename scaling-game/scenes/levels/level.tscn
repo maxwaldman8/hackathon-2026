@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://c1i674pey1ia7"]
+[gd_scene format=4 uid="uid://i5cyx363nsq6"]
 
 [ext_resource type="Script" uid="uid://7oh5jn0m8563" path="res://scripts/level.gd" id="1_b2cq8"]
 [ext_resource type="Texture2D" uid="uid://bfdborgmtbh3" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_urvlt"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="5_urvlt"]
 [ext_resource type="AudioStream" uid="uid://bhcqn20te1d1f" path="res://assets/music/Blueprints.wav" id="6_d4w6o"]
 
-[node name="Level3" type="Node2D" unique_id=854432131 node_paths=PackedStringArray("player")]
+[node name="Level4" type="Node2D" unique_id=854432131 node_paths=PackedStringArray("player")]
 script = ExtResource("1_b2cq8")
 player = NodePath("Player")
 level_bounds = Rect2i(0, 0, 100, 100)
