@@ -316,12 +316,12 @@ func _input(event):
 			for label in level_labels:
 				label.visible = false
 	if not is_main and is_done:
-		SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
+		SceneManager.load_new_scene("res://scenes/levels/hub_level.tscn", "fade_to_black")
 		disabled = true
 		SavedLevelInfo.solved_levels.append(int(self.scene_file_path))
 	if event.is_action_pressed("enter"):
 		if not is_main and not is_done:
-			SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
+			SceneManager.load_new_scene("res://scenes/levels/hub_level.tscn", "fade_to_black")
 			disabled = true
 			SavedLevelInfo.did_just_quit_level = [true, int(self.scene_file_path)]
 		elif is_main and is_done:
