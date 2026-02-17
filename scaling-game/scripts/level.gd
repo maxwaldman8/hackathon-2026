@@ -24,7 +24,6 @@ func _ready() -> void:
 		max_x = max(max_x, tile.x)
 		max_y = max(max_y, tile.y)
 	targets_bounds = Rect2i(min_x, min_y, max_x - min_x + 1, max_y - min_y + 1)
-	print(targets_bounds)
 
 func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_alternative_tile(coords) == 1
