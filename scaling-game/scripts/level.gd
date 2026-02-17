@@ -365,3 +365,8 @@ func _check_finished():
 		if box_coords in unchecked_targets:
 			unchecked_targets.erase(box_coords)
 	return len(unchecked_targets) == 0
+
+func _process(_delta: float) -> void:
+	if player.position.x == 0 and is_main and not disabled:
+		disabled = true
+		SceneManager.load_new_scene("res://scenes/main_menu.tscn", "fade_to_black")

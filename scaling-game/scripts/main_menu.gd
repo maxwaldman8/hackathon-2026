@@ -11,3 +11,7 @@ func _ready() -> void:
 
 func _on_play_button_pressed() -> void:
 	SceneManager.load_new_scene("res://scenes/levels/hub_level.tscn", "fade_to_black")
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
