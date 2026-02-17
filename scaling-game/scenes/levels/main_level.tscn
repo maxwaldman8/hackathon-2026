@@ -1,9 +1,27 @@
 [gd_scene format=4 uid="uid://cqbnr4o6508pf"]
 
 [ext_resource type="Script" uid="uid://7oh5jn0m8563" path="res://scripts/level.gd" id="1_6we3w"]
-[ext_resource type="Texture2D" uid="uid://bc1mhenae3ykx" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_hn3as"]
+[ext_resource type="Texture2D" uid="uid://0gn5uc02a8lh" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_hn3as"]
 [ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="3_6we3w"]
 [ext_resource type="PackedScene" uid="uid://5oi8emxl0rfu" path="res://scenes/player.tscn" id="3_8ra5a"]
+[ext_resource type="Texture2D" uid="uid://dw2rivm531ftn" path="res://assets/textures/Blueprint Borders.png" id="3_geiq8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_geiq8"]
+texture = ExtResource("3_geiq8")
+texture_region_size = Vector2i(64, 64)
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tkkka"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_geiq8")
 
 [node name="MainLevel" type="Node2D" unique_id=1418454543 node_paths=PackedStringArray("player")]
 script = ExtResource("1_6we3w")
@@ -16,6 +34,10 @@ offset_right = 1024.0
 offset_bottom = 768.0
 texture = ExtResource("2_hn3as")
 stretch_mode = 1
+
+[node name="Borders" type="TileMapLayer" parent="." unique_id=1198295347]
+enabled = false
+tile_set = SubResource("TileSet_tkkka")
 
 [node name="Player" parent="." unique_id=1501448831 node_paths=PackedStringArray("level") instance=ExtResource("3_8ra5a")]
 position = Vector2(64, 512)

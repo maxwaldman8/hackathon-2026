@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v5aboodg6iaa"
-path="res://.godot/imported/sprite_1.png-c5bf3a2b0dda4e7d8b742fe604d07909.ctex"
+uid="uid://dw2rivm531ftn"
+path="res://.godot/imported/Blueprint Borders.png-dc8a224c1f6aa50cdc846a2a9a40ff3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Blueprint Tilemap/sprite_1.png"
-dest_files=["res://.godot/imported/sprite_1.png-c5bf3a2b0dda4e7d8b742fe604d07909.ctex"]
+source_file="res://assets/textures/Blueprint Borders.png"
+dest_files=["res://.godot/imported/Blueprint Borders.png-dc8a224c1f6aa50cdc846a2a9a40ff3d.ctex"]
 
 [params]
 
