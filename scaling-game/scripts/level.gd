@@ -8,6 +8,7 @@ extends Node2D
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
 var target_bounds : Dictionary
+var level_targets : Array[Vector2i]
 var is_done : bool = false
 var level_labels : Array[Node]
 var finished_levels : Array[Node]
@@ -35,6 +36,7 @@ func _ready() -> void:
 	for tile in used:
 		if grid.get_cell_alternative_tile(tile) == 3:
 			new_used.append(tile)
+			level_targets.append(tile)
 	used = new_used
 	while len(used) > 0:
 		# Getting the group
@@ -44,7 +46,7 @@ func _ready() -> void:
 		while len(unchecked) > 0:
 			var next : Vector2i = unchecked.pop_front()
 			var surroundings = DIRECTIONS.map(func(x): return x + next)
-			if next in TAGS.keys():
+			if next in TAGS.keys() and is_main:
 				level_num_tag = TAGS[next]
 			for adj in surroundings:
 				if adj in used:
@@ -54,7 +56,8 @@ func _ready() -> void:
 		
 		# Adjusting solids (completed levels)
 		
-		if level_num_tag in SavedLevelInfo.solved_levels:
+		if level_num_tag in SavedLevelInfo.solved_levels and is_main:
+			print(SavedLevelInfo.solved_levels)
 			for tile in checked:
 				grid.set_cell(tile, 3, Vector2i(0, 0), 1)
 			grid.update_internals()
@@ -326,4 +329,20 @@ func _input(event):
 			disabled = true
 
 func _check_finished():
-	return player.bounds in target_bounds
+	if is_main:
+		return player.bounds in target_bounds
+	var unchecked_targets = level_targets.duplicate()
+	for x in range(player.bounds.position.x, player.bounds.end.x):
+		for y in range(player.bounds.position.y, player.bounds.end.y):
+			var player_pos = Vector2i(x, y)
+			if player_pos not in unchecked_targets:
+				return false
+			unchecked_targets.erase(player_pos)
+	if len(unchecked_targets) == 0:
+		return true
+	for box in boxes:
+		@warning_ignore("integer_division")
+		var box_coords = Vector2i(box.position) / grid.tile_set.tile_size
+		if box_coords in unchecked_targets:
+			unchecked_targets.erase(box_coords)
+	return len(unchecked_targets) == 0
