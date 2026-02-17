@@ -63,7 +63,7 @@ func _ready() -> void:
 			grid.update_internals()
 			finished_levels[level_num_tag - 1].visible = true
 		
-		# onverting group to rect
+		# Converting group to rect
 		var min_x : int = 1000
 		var min_y : int = 1000
 		var max_x : int = -1
