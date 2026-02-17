@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var grid : TileMapLayer = level.get_node("Grid")
 @onready var bounds : Rect2i = Rect2i(Vector2i(position / Vector2(grid.tile_set.tile_size)), scale)
+@onready var sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var lerping: bool = false
 var lerp_time: float = 0.1
@@ -59,3 +60,6 @@ func scale_bounds(direction:String, type:String, amount:int):
 	original_scale = scale
 	lerp_to_pos = bounds.position * grid.tile_set.tile_size
 	lerp_to_scale = bounds.size
+	sound.pitch_scale = 0 if (amount == 0) else 1.0 / pow(amount, 0.125) * (1.25 if type == "contract" else 1.0)
+	if amount != 0:
+		sound.play()
