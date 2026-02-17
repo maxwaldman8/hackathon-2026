@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cqbnr4o6508pf"]
 
 [ext_resource type="Script" uid="uid://7oh5jn0m8563" path="res://scripts/level.gd" id="1_6we3w"]
+[ext_resource type="Texture2D" uid="uid://bc1mhenae3ykx" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_hn3as"]
 [ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="3_6we3w"]
 [ext_resource type="PackedScene" uid="uid://5oi8emxl0rfu" path="res://scenes/player.tscn" id="3_8ra5a"]
 
@@ -9,6 +10,12 @@ script = ExtResource("1_6we3w")
 is_main = true
 player = NodePath("Player")
 level_bounds = Rect2i(0, 0, 100, 100)
+
+[node name="Background" type="TextureRect" parent="." unique_id=613533989]
+offset_right = 1024.0
+offset_bottom = 768.0
+texture = ExtResource("2_hn3as")
+stretch_mode = 1
 
 [node name="Player" parent="." unique_id=1501448831 node_paths=PackedStringArray("level") instance=ExtResource("3_8ra5a")]
 position = Vector2(64, 512)

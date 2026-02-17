@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bd1i5crrj7luh"]
 
-[node name="Target" type="ColorRect" unique_id=1976382923]
+[ext_resource type="Texture2D" uid="uid://dvjqw7x7a0vj8" path="res://assets/textures/Blueprint Tilemap/sprite_2.png" id="1_b37e2"]
+
+[node name="Target" type="TextureRect" unique_id=745460611]
 offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
-color = Color(0.30588236, 1, 0.29411766, 1)
+texture = ExtResource("1_b37e2")
