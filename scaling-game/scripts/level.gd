@@ -50,22 +50,32 @@ func _input(event):
 				if has_box(Vector2i(x, y)):
 					pushed_boxes.push_front(Vector2i(x, y))
 			y += 1
+			if y + pushed_boxes.size() > max_y:
+				max_y = y + pushed_boxes.size()
+		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
+			var y: int = player.bounds.position.y
+			var stopped: bool = false
+			var pushed_boxes: Array[Vector2i] = []
+			while !stopped:
+				y -= 1
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.push_front(Vector2i(x, y))
+			y += 1
+			var farthest_y: int = max_y - pushed_boxes.size()
 			stopped = false
 			while !stopped:
 				stopped = true
 				for i in range(0, pushed_boxes.size()):
+					if pushed_boxes[i].y <= farthest_y: continue
 					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x, pushed_boxes[i].y - 1)
 					if !is_invalid(new_pos) and !has_box(new_pos):
 						pushed_boxes[i].y -= 1
 						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
 						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 						stopped = false
-			if pushed_boxes.size() > 0:
-				if pushed_boxes[pushed_boxes.size() - 1].y + 1 > max_y:
-					max_y = pushed_boxes[pushed_boxes.size() - 1].y + 1
-			else:
-				if y > max_y:
-					max_y = y
 		if max_y == player.bounds.position.y:
 			player.scale_bounds("up", "contract", player.bounds.size.y - 1)
 		else:
@@ -84,22 +94,32 @@ func _input(event):
 				if has_box(Vector2i(x, y)):
 					pushed_boxes.push_front(Vector2i(x, y))
 			x += 1
+			if x + pushed_boxes.size() > max_x:
+				max_x = x + pushed_boxes.size()
+		for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
+			var x: int = player.bounds.position.x
+			var stopped: bool = false
+			var pushed_boxes: Array[Vector2i] = []
+			while !stopped:
+				x -= 1
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.push_front(Vector2i(x, y))
+			x += 1
+			var farthest_x: int = max_x - pushed_boxes.size()
 			stopped = false
 			while !stopped:
 				stopped = true
 				for i in range(0, pushed_boxes.size()):
+					if pushed_boxes[i].x <= farthest_x: continue
 					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x - 1, pushed_boxes[i].y)
 					if !is_invalid(new_pos) and !has_box(new_pos):
 						pushed_boxes[i].x -= 1
 						grid.set_cell(Vector2i(pushed_boxes[i].x + 1, pushed_boxes[i].y), -1, Vector2i(0, 0), 0)
 						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 						stopped = false
-			if pushed_boxes.size() > 0:
-				if pushed_boxes[pushed_boxes.size() - 1].x + 1 > max_x:
-					max_x = pushed_boxes[pushed_boxes.size() - 1].x + 1
-			else:
-				if x > max_x:
-					max_x = x
 		if max_x == player.bounds.position.x:
 			player.scale_bounds("left", "contract", player.bounds.size.x - 1)
 		else:
@@ -118,22 +138,32 @@ func _input(event):
 				if has_box(Vector2i(x, y)):
 					pushed_boxes.push_front(Vector2i(x, y))
 			x -= 1
+			if x - pushed_boxes.size() < min_x:
+				min_x = x - pushed_boxes.size()
+		for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
+			var x: int = player.bounds.position.x + player.bounds.size.x - 1
+			var stopped: bool = false
+			var pushed_boxes: Array[Vector2i] = []
+			while !stopped:
+				x += 1
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.push_front(Vector2i(x, y))
+			x -= 1
+			var farthest_x: int = min_x + pushed_boxes.size()
 			stopped = false
 			while !stopped:
 				stopped = true
 				for i in range(0, pushed_boxes.size()):
+					if pushed_boxes[i].x >= farthest_x: continue
 					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x + 1, pushed_boxes[i].y)
 					if !is_invalid(new_pos) and !has_box(new_pos):
 						pushed_boxes[i].x += 1
 						grid.set_cell(Vector2i(pushed_boxes[i].x - 1, pushed_boxes[i].y), -1, Vector2i(0, 0), 0)
 						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 						stopped = false
-			if pushed_boxes.size() > 0:
-				if pushed_boxes[pushed_boxes.size() - 1].x - 1 < min_x:
-					min_x = pushed_boxes[pushed_boxes.size() - 1].x - 1
-			else:
-				if x < min_x:
-					min_x = x
 		if min_x == player.bounds.position.x + player.bounds.size.x - 1:
 			player.scale_bounds("right", "contract", player.bounds.size.x - 1)
 		else:
@@ -152,22 +182,32 @@ func _input(event):
 				if has_box(Vector2i(x, y)):
 					pushed_boxes.push_front(Vector2i(x, y))
 			y -= 1
+			if y - pushed_boxes.size() < min_y:
+				min_y = y - pushed_boxes.size()
+		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
+			var y: int = player.bounds.position.y + player.bounds.size.y - 1
+			var stopped: bool = false
+			var pushed_boxes: Array[Vector2i] = []
+			while !stopped:
+				y += 1
+				if is_invalid(Vector2i(x, y)):
+					stopped = true
+					break
+				if has_box(Vector2i(x, y)):
+					pushed_boxes.push_front(Vector2i(x, y))
+			y -= 1
+			var farthest_y: int = min_y + pushed_boxes.size()
 			stopped = false
 			while !stopped:
 				stopped = true
 				for i in range(0, pushed_boxes.size()):
+					if pushed_boxes[i].y >= farthest_y: continue
 					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1)
 					if !is_invalid(new_pos) and !has_box(new_pos):
 						pushed_boxes[i].y += 1
 						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y - 1), -1, Vector2i(0, 0), 0)
 						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
 						stopped = false
-			if pushed_boxes.size() > 0:
-				if pushed_boxes[pushed_boxes.size() - 1].y - 1 < min_y:
-					min_y = pushed_boxes[pushed_boxes.size() - 1].y - 1
-			else:
-				if y < min_y:
-					min_y = y
 		if min_y == player.bounds.position.y + player.bounds.size.y - 1:
 			player.scale_bounds("down", "contract", player.bounds.size.y - 1)
 		else:
