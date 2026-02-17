@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bd1i5crrj7luh"]
 
-[ext_resource type="Texture2D" uid="uid://dvjqw7x7a0vj8" path="res://assets/textures/Blueprint Tilemap/sprite_2.png" id="1_b37e2"]
+[ext_resource type="Texture2D" uid="uid://jpbpy3kh6kco" path="res://assets/textures/Blueprint Tilemap/sprite_2.png" id="1_b37e2"]
 
 [node name="Target" type="TextureRect" unique_id=745460611]
 offset_left = -32.0

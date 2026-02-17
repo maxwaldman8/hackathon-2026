@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneManager="*uid://b5avoonmjc6dj"
+SavedLevelInfo="*uid://b12wa4may612p"
 
 [display]
 

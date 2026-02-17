@@ -7,7 +7,7 @@ extends Node2D
 @onready var boxes = $Boxes.get_children()
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
-var targets_bounds : Rect2i
+var target_bounds : Dictionary
 var is_done : bool = false
 var level_labels : Array[Node]
 var disabled : bool = false
@@ -24,7 +24,7 @@ func _ready_labels():
 
 func _ready() -> void:
 	_ready_labels()
-		
+	
 	# Future floodfill for target collection
 	var used = grid.get_used_cells()
 	var new_used = []
@@ -32,37 +32,45 @@ func _ready() -> void:
 		if grid.get_cell_alternative_tile(tile) == 3:
 			new_used.append(tile)
 	used = new_used
-	print(used)
-	used = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
-	#while len(used) > 0:
-		## Getting the group
-		#var unchecked : Array[Vector2i] = [used.pop_front()]
-		#var checked : Array[Vector2i] = []
-		#var level_num_tag : int
-		#while len(unchecked) > 0:
-			#var next : Vector2i = unchecked.pop_front()
-			#var surroundings = DIRECTIONS.map(func(x): return x + next)
-			#if next in TAGS.keys:
-				#level_num_tag = TAGS[next]
-			#for adj in surroundings:
-				#if adj in used:
-					#unchecked.append(adj)
-					#used.erase(adj)
-			#checked.append(next)
-		#print(checked)
+	while len(used) > 0:
+		# Getting the group
+		var unchecked : Array[Vector2i] = [used.pop_front()]
+		var checked : Array[Vector2i] = []
+		var level_num_tag : int
+		while len(unchecked) > 0:
+			var next : Vector2i = unchecked.pop_front()
+			var surroundings = DIRECTIONS.map(func(x): return x + next)
+			if next in TAGS.keys():
+				level_num_tag = TAGS[next]
+			for adj in surroundings:
+				if adj in used:
+					unchecked.append(adj)
+					used.erase(adj)
+			checked.append(next)
+		
+		# Adjusting solids (completed levels)
+		
+		if level_num_tag in SavedLevelInfo.solved_levels:
+			for tile in checked:
+				grid.set_cell(tile, 1)
+		
 		# Converting group to rect
-	var min_x : int = 1000
-	var min_y : int = 1000
-	var max_x : int = -1
-	var max_y : int = -1
-	for tile in used:
-		if grid.get_cell_alternative_tile(tile) != 3:
-			continue
-		min_x = min(min_x, tile.x)
-		min_y = min(min_y, tile.y)
-		max_x = max(max_x, tile.x)
-		max_y = max(max_y, tile.y)
-	targets_bounds = Rect2i(min_x, min_y, max_x - min_x + 1, max_y - min_y + 1)
+		var min_x : int = 1000
+		var min_y : int = 1000
+		var max_x : int = -1
+		var max_y : int = -1
+		for tile in checked:
+			min_x = min(min_x, tile.x)
+			min_y = min(min_y, tile.y)
+			max_x = max(max_x, tile.x)
+			max_y = max(max_y, tile.y)
+		var group = Rect2i(min_x, min_y, max_x - min_x + 1, max_y - min_y + 1)
+		
+		# Checking for quitting level
+		if SavedLevelInfo.did_just_quit_level[0]:
+			pass
+		
+		target_bounds[group] = level_num_tag
 
 func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_alternative_tile(coords) == 1
@@ -293,13 +301,15 @@ func _input(event):
 	if not is_main and is_done:
 		SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
 		disabled = true
+		SavedLevelInfo.solved_levels.append(int(self.scene_file_path))
 	if event.is_action_pressed("enter"):
 		if not is_main and not is_done:
 			SceneManager.load_new_scene("res://scenes/levels/main_level.tscn", "fade_to_black")
 			disabled = true
+			SavedLevelInfo.did_just_quit_level = [true, int(self.scene_file_path)]
 		elif is_main and is_done:
-			SceneManager.load_new_scene("res://scenes/levels/level" + str(1) + ".tscn", "fade_to_black")
+			SceneManager.load_new_scene("res://scenes/levels/level" + str(target_bounds[player.bounds]) + ".tscn", "fade_to_black")
 			disabled = true
 
 func _check_finished():
-	return targets_bounds == player.bounds
+	return player.bounds in target_bounds

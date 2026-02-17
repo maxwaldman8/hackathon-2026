@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bstpd3058fiy7"
-path="res://.godot/imported/sprite_1.png-c5bf3a2b0dda4e7d8b742fe604d07909.ctex"
+uid="uid://7hx206r05pks"
+path="res://.godot/imported/Couch.png-0a87a40c420db38ab611900d3d034b24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Blueprint Tilemap/sprite_1.png"
-dest_files=["res://.godot/imported/sprite_1.png-c5bf3a2b0dda4e7d8b742fe604d07909.ctex"]
+source_file="res://assets/textures/Couch.png"
+dest_files=["res://.godot/imported/Couch.png-0a87a40c420db38ab611900d3d034b24.ctex"]
 
 [params]
 
