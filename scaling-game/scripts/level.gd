@@ -4,9 +4,9 @@ extends Node2D
 @export var is_main : bool
 @export var player : Player
 @onready var grid : TileMapLayer = $Grid
+@onready var boxes = $Boxes.get_children()
 @export var level_bounds : Rect2i = Rect2i(0, 0, 0, 0)
 
-var boxes: Array[Vector2i] = []
 var targets_bounds : Rect2i
 var is_done : bool = false
 var level_labels : Array[Node]
@@ -68,7 +68,16 @@ func has_wall(coords: Vector2i) -> bool:
 	return grid.get_cell_alternative_tile(coords) == 1
 
 func has_box(coords: Vector2i) -> bool:
-	return grid.get_cell_alternative_tile(coords) == 2
+	for box in boxes:
+		if Vector2i(box.position) / grid.tile_set.tile_size == coords:
+			return true
+	return false
+
+func get_box_at_pos(coords: Vector2i) -> Box:
+	for box in boxes:
+		if Vector2i(box.position) / grid.tile_set.tile_size == coords:
+			return box
+	return null
 
 func is_invalid(coords: Vector2i) -> bool:
 	return has_wall(coords) or !level_bounds.has_point(coords)
@@ -77,6 +86,11 @@ func _input(event):
 	if disabled:
 		return
 	if event.is_action_pressed("up"):
+		if player.lerping:
+			return
+		var old_box_positions: Array[Vector2i] = []
+		for box in boxes:
+			old_box_positions.append(box.position)
 		var max_y: int = -1
 		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
 			var y: int = player.bounds.position.y
@@ -95,32 +109,38 @@ func _input(event):
 		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
 			var y: int = player.bounds.position.y
 			var stopped: bool = false
-			var pushed_boxes: Array[Vector2i] = []
+			var pushed_boxes_indices: Array[int] = []
+			var pushed_boxes: Array[Box] = []
 			while !stopped:
 				y -= 1
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
 					break
-				if has_box(Vector2i(x, y)):
-					pushed_boxes.push_front(Vector2i(x, y))
+				var maybe_box = get_box_at_pos(Vector2i(x, y))
+				if maybe_box != null:
+					pushed_boxes.push_front(maybe_box)
+					pushed_boxes_indices.push_front(old_box_positions.find(Vector2i(x, y) * grid.tile_set.tile_size))
 			y += 1
-			var farthest_y: int = max_y - pushed_boxes.size()
-			stopped = false
-			while !stopped:
-				stopped = true
-				for i in range(0, pushed_boxes.size()):
-					if pushed_boxes[i].y <= farthest_y: continue
-					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x, pushed_boxes[i].y - 1)
-					if !is_invalid(new_pos) and !has_box(new_pos):
-						pushed_boxes[i].y -= 1
-						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1), -1, Vector2i(0, 0), 0)
-						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
-						stopped = false
+			var counter = 0
+			var i = player.bounds.position.y
+			while i > max_y - 1 - counter:
+				if has_box(Vector2i(x, i)):
+					counter += 1
+				i -= 1
+			for j in range(0, counter):
+				var new_position = Vector2(pushed_boxes[pushed_boxes.size() - 1 - j].position.x, (max_y - 1 - j) * grid.tile_set.tile_size.y)
+				pushed_boxes[pushed_boxes.size() - 1 - j].position = old_box_positions[pushed_boxes_indices[pushed_boxes.size() - 1 - j]]
+				pushed_boxes[pushed_boxes.size() - 1 - j].move(new_position)
 		if max_y == player.bounds.position.y:
 			player.scale_bounds("up", "contract", player.bounds.size.y - 1)
 		else:
 			player.scale_bounds("up", "expand", abs(player.bounds.position.y - max_y))
 	if event.is_action_pressed("left"):
+		if player.lerping:
+			return
+		var old_box_positions: Array[Vector2i] = []
+		for box in boxes:
+			old_box_positions.append(box.position)
 		var max_x: int = -1
 		for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
 			var x: int = player.bounds.position.x
@@ -139,32 +159,38 @@ func _input(event):
 		for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
 			var x: int = player.bounds.position.x
 			var stopped: bool = false
-			var pushed_boxes: Array[Vector2i] = []
+			var pushed_boxes_indices: Array[int] = []
+			var pushed_boxes: Array[Box] = []
 			while !stopped:
 				x -= 1
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
 					break
-				if has_box(Vector2i(x, y)):
-					pushed_boxes.push_front(Vector2i(x, y))
+				var maybe_box = get_box_at_pos(Vector2i(x, y))
+				if maybe_box != null:
+					pushed_boxes.push_front(maybe_box)
+					pushed_boxes_indices.push_front(old_box_positions.find(Vector2i(x, y) * grid.tile_set.tile_size))
 			x += 1
-			var farthest_x: int = max_x - pushed_boxes.size()
-			stopped = false
-			while !stopped:
-				stopped = true
-				for i in range(0, pushed_boxes.size()):
-					if pushed_boxes[i].x <= farthest_x: continue
-					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x - 1, pushed_boxes[i].y)
-					if !is_invalid(new_pos) and !has_box(new_pos):
-						pushed_boxes[i].x -= 1
-						grid.set_cell(Vector2i(pushed_boxes[i].x + 1, pushed_boxes[i].y), -1, Vector2i(0, 0), 0)
-						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
-						stopped = false
+			var counter = 0
+			var i = player.bounds.position.x
+			while i > max_x - 1 - counter:
+				if has_box(Vector2i(i, y)):
+					counter += 1
+				i -= 1
+			for j in range(0, counter):
+				var new_position = Vector2((max_x - 1 - j) * grid.tile_set.tile_size.x, pushed_boxes[pushed_boxes.size() - 1 - j].position.y)
+				pushed_boxes[pushed_boxes.size() - 1 - j].position = old_box_positions[pushed_boxes_indices[pushed_boxes.size() - 1 - j]]
+				pushed_boxes[pushed_boxes.size() - 1 - j].move(new_position)
 		if max_x == player.bounds.position.x:
 			player.scale_bounds("left", "contract", player.bounds.size.x - 1)
 		else:
 			player.scale_bounds("left", "expand", abs(player.bounds.position.x - max_x))
 	if event.is_action_pressed("right"):
+		if player.lerping:
+			return
+		var old_box_positions: Array[Vector2i] = []
+		for box in boxes:
+			old_box_positions.append(box.position)
 		var min_x: int = level_bounds.position.x + level_bounds.size.x
 		for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
 			var x: int = player.bounds.position.x + player.bounds.size.x - 1
@@ -183,32 +209,38 @@ func _input(event):
 		for y in range(player.bounds.position.y, player.bounds.position.y + player.bounds.size.y):
 			var x: int = player.bounds.position.x + player.bounds.size.x - 1
 			var stopped: bool = false
-			var pushed_boxes: Array[Vector2i] = []
+			var pushed_boxes_indices: Array[int] = []
+			var pushed_boxes: Array[Box] = []
 			while !stopped:
 				x += 1
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
 					break
-				if has_box(Vector2i(x, y)):
-					pushed_boxes.push_front(Vector2i(x, y))
+				var maybe_box = get_box_at_pos(Vector2i(x, y))
+				if maybe_box != null:
+					pushed_boxes.push_front(maybe_box)
+					pushed_boxes_indices.push_front(old_box_positions.find(Vector2i(x, y) * grid.tile_set.tile_size))
 			x -= 1
-			var farthest_x: int = min_x + pushed_boxes.size()
-			stopped = false
-			while !stopped:
-				stopped = true
-				for i in range(0, pushed_boxes.size()):
-					if pushed_boxes[i].x >= farthest_x: continue
-					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x + 1, pushed_boxes[i].y)
-					if !is_invalid(new_pos) and !has_box(new_pos):
-						pushed_boxes[i].x += 1
-						grid.set_cell(Vector2i(pushed_boxes[i].x - 1, pushed_boxes[i].y), -1, Vector2i(0, 0), 0)
-						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
-						stopped = false
+			var counter = 0
+			var i = player.bounds.position.x + player.bounds.size.x - 1
+			while i < min_x + 1 + counter:
+				if has_box(Vector2i(i, y)):
+					counter += 1
+				i += 1
+			for j in range(0, counter):
+				var new_position = Vector2( (min_x + 1 + j) * grid.tile_set.tile_size.x, pushed_boxes[pushed_boxes.size() - 1 - j].position.y)
+				pushed_boxes[pushed_boxes.size() - 1 - j].position = old_box_positions[pushed_boxes_indices[pushed_boxes.size() - 1 - j]]
+				pushed_boxes[pushed_boxes.size() - 1 - j].move(new_position)
 		if min_x == player.bounds.position.x + player.bounds.size.x - 1:
 			player.scale_bounds("right", "contract", player.bounds.size.x - 1)
 		else:
 			player.scale_bounds("right", "expand", abs(player.bounds.position.x + player.bounds.size.x - 1 - min_x))
 	if event.is_action_pressed("down"):
+		if player.lerping:
+			return
+		var old_box_positions: Array[Vector2i] = []
+		for box in boxes:
+			old_box_positions.append(box.position)
 		var min_y: int = level_bounds.position.y + level_bounds.size.y
 		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
 			var y: int = player.bounds.position.y + player.bounds.size.y - 1
@@ -227,27 +259,28 @@ func _input(event):
 		for x in range(player.bounds.position.x, player.bounds.position.x + player.bounds.size.x):
 			var y: int = player.bounds.position.y + player.bounds.size.y - 1
 			var stopped: bool = false
-			var pushed_boxes: Array[Vector2i] = []
+			var pushed_boxes_indices: Array[int] = []
+			var pushed_boxes: Array[Box] = []
 			while !stopped:
 				y += 1
 				if is_invalid(Vector2i(x, y)):
 					stopped = true
 					break
-				if has_box(Vector2i(x, y)):
-					pushed_boxes.push_front(Vector2i(x, y))
+				var maybe_box = get_box_at_pos(Vector2i(x, y))
+				if maybe_box != null:
+					pushed_boxes.push_front(maybe_box)
+					pushed_boxes_indices.push_front(old_box_positions.find(Vector2i(x, y) * grid.tile_set.tile_size))
 			y -= 1
-			var farthest_y: int = min_y + pushed_boxes.size()
-			stopped = false
-			while !stopped:
-				stopped = true
-				for i in range(0, pushed_boxes.size()):
-					if pushed_boxes[i].y >= farthest_y: continue
-					var new_pos: Vector2i = Vector2i(pushed_boxes[i].x, pushed_boxes[i].y + 1)
-					if !is_invalid(new_pos) and !has_box(new_pos):
-						pushed_boxes[i].y += 1
-						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y - 1), -1, Vector2i(0, 0), 0)
-						grid.set_cell(Vector2i(pushed_boxes[i].x, pushed_boxes[i].y), 0, Vector2i(0, 0), 2)
-						stopped = false
+			var counter = 0
+			var i = player.bounds.position.y + player.bounds.size.y - 1
+			while i < min_y + 1 + counter:
+				if has_box(Vector2i(x, i)):
+					counter += 1
+				i += 1
+			for j in range(0, counter):
+				var new_position = Vector2(pushed_boxes[pushed_boxes.size() - 1 - j].position.x, (min_y + 1 + j) * grid.tile_set.tile_size.y)
+				pushed_boxes[pushed_boxes.size() - 1 - j].position = old_box_positions[pushed_boxes_indices[pushed_boxes.size() - 1 - j]]
+				pushed_boxes[pushed_boxes.size() - 1 - j].move(new_position)
 		if min_y == player.bounds.position.y + player.bounds.size.y - 1:
 			player.scale_bounds("down", "contract", player.bounds.size.y - 1)
 		else:
