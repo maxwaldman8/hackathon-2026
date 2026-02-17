@@ -31,6 +31,13 @@ func _process(delta: float) -> void:
 		else:
 			position = Vector2(lerpf(original_pos.x, lerp_to_pos.x, lerp_progress / lerp_time), lerpf(original_pos.y, lerp_to_pos.y, lerp_progress / lerp_time))
 			scale = Vector2(lerpf(original_scale.x, lerp_to_scale.x, lerp_progress / lerp_time), lerpf(original_scale.y, lerp_to_scale.y, lerp_progress / lerp_time))
+	$Sprite2D.global_scale = 2 * Vector2(min(scale.x, scale.y), min(scale.x, scale.y))
+	if level.is_main:
+		$Sprite2D.texture = load("res://assets/textures/Face1.png")
+		$ColorRect.color = Color("#999999")
+	else:
+		$Sprite2D.texture = load("res://assets/textures/Face2.png")
+		$ColorRect.color = Color("#ffffffdd")
 
 
 func scale_bounds(direction:String, type:String, amount:int):
