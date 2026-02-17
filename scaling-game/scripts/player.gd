@@ -60,6 +60,6 @@ func scale_bounds(direction:String, type:String, amount:int):
 	original_scale = scale
 	lerp_to_pos = bounds.position * grid.tile_set.tile_size
 	lerp_to_scale = bounds.size
-	sound.pitch_scale = 1 if (amount == 0) else 1.0 / pow(amount, 0.125) * (1.25 if type == "contract" else 1.0)
+	sound.pitch_scale = 1 if (amount >= 0) else 1.0 / pow(amount, 0.125) * (1.25 if type == "contract" else 1.0)
 	if amount != 0:
 		sound.play()
