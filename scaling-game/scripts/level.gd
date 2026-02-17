@@ -12,6 +12,9 @@ var is_done : bool = false
 var level_labels : Array[Node]
 var disabled : bool = false
 
+const DIRECTIONS : Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
+const TAGS : Dictionary = {Vector2i(2, 4): 1, Vector2i(9, 2): 2, Vector2i(8, 6): 3}
+
 func _ready_labels():
 	if not is_main:
 		return
@@ -24,6 +27,30 @@ func _ready() -> void:
 		
 	# Future floodfill for target collection
 	var used = grid.get_used_cells()
+	var new_used = []
+	for tile in used:
+		if grid.get_cell_alternative_tile(tile) == 3:
+			new_used.append(tile)
+	used = new_used
+	print(used)
+	used = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
+	#while len(used) > 0:
+		## Getting the group
+		#var unchecked : Array[Vector2i] = [used.pop_front()]
+		#var checked : Array[Vector2i] = []
+		#var level_num_tag : int
+		#while len(unchecked) > 0:
+			#var next : Vector2i = unchecked.pop_front()
+			#var surroundings = DIRECTIONS.map(func(x): return x + next)
+			#if next in TAGS.keys:
+				#level_num_tag = TAGS[next]
+			#for adj in surroundings:
+				#if adj in used:
+					#unchecked.append(adj)
+					#used.erase(adj)
+			#checked.append(next)
+		#print(checked)
+		# Converting group to rect
 	var min_x : int = 1000
 	var min_y : int = 1000
 	var max_x : int = -1
