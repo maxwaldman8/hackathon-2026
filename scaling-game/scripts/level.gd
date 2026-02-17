@@ -15,12 +15,7 @@ var finished_levels : Array[Node]
 var disabled : bool = false
 
 const DIRECTIONS : Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
-const TAGS : Dictionary = {
-	Vector2i(17, 32): 1, Vector2i(17, 24): 2, Vector2i(21, 26): 3,
-	Vector2i(23, 20): 4, Vector2i(42, 24): 5, Vector2i(42, 22): 6,
-	Vector2i(39, 24): 7, Vector2i(36, 13): 8, Vector2i(33, 10): 9,
-	Vector2i(40, 10): 10, Vector2i(27, 8): 11, Vector2i(5, 3): 12,
-}
+const TAGS : Dictionary = {Vector2i(2, 4): 1, Vector2i(9, 2): 2, Vector2i(8, 6): 3}
 
 func _ready_labels():
 	if not is_main:
