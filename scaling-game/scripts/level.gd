@@ -12,7 +12,6 @@ var level_targets : Array[Vector2i]
 var is_done : bool = false
 var level_labels : Array[Node]
 var finished_levels : Array[Node]
-var blueprints : Array[Node]
 var disabled : bool = false
 
 const DIRECTIONS : Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
@@ -28,7 +27,6 @@ func _ready_labels():
 		return
 	level_labels = $LevelEnterLabels.get_children()
 	finished_levels = $FinishedLevels.get_children()
-	blueprints = $Blueprints.get_children()
 	for label in level_labels:
 		label.visible = false
 
@@ -78,11 +76,11 @@ func _ready() -> void:
 		# Adjusting solids (completed levels)
 		
 		if level_num_tag in SavedLevelInfo.solved_levels and is_main:
+			print(SavedLevelInfo.solved_levels)
 			for tile in checked:
 				grid.set_cell(tile, 3, Vector2i(0, 0), 1)
 			grid.update_internals()
 			finished_levels[level_num_tag - 1].visible = true
-			blueprints[level_num_tag - 1].visible = false
 		
 		# Converting group to rect
 		var min_x : int = 1000
@@ -371,4 +369,7 @@ func _check_finished():
 func _process(_delta: float) -> void:
 	if player.position.x == 0 and is_main and not disabled:
 		disabled = true
-		SceneManager.load_new_scene("res://scenes/main_menu.tscn", "fade_to_black")
+		if SavedLevelInfo.solved_levels.find(12) != -1:
+			SceneManager.load_new_scene("res://scenes/credits.tscn", "fade_to_black")
+		else:
+			SceneManager.load_new_scene("res://scenes/main_menu.tscn", "fade_to_black")

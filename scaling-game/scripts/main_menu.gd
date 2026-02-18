@@ -15,3 +15,7 @@ func _on_play_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_credits_button_pressed() -> void:
+	SceneManager.load_new_scene("res://scenes/credits.tscn", "fade_to_black")

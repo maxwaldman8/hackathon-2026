@@ -112,4 +112,5 @@ scale = Vector2(6, 6)
 texture = ExtResource("3_wu84c")
 
 [connection signal="pressed" from="Buttons/Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Buttons/Credits Button" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Buttons/Quit Button" to="." method="_on_quit_button_pressed"]
