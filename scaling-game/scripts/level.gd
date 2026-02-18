@@ -337,6 +337,8 @@ func _input(event):
 			for label in level_labels:
 				label.visible = false
 	if not is_main and is_done:
+		Music.get_node("AudioStreamPlayer2D").stream = load("res://assets/music/Victory.wav")
+		Music.get_node("AudioStreamPlayer2D").play()
 		SceneManager.load_new_scene("res://scenes/levels/hub_level.tscn", "fade_to_black")
 		disabled = true
 		SavedLevelInfo.solved_levels.append(int(self.scene_file_path))

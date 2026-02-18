@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dpdhd0d002pdf"]
+[gd_scene format=3 uid="uid://deanmgtg5tak8"]
 
-[ext_resource type="PackedScene" uid="uid://g1eu8tu4wguk" path="res://scenes/levels/level.tscn" id="1_0bpdh"]
+[ext_resource type="PackedScene" uid="uid://hj33oquxeyvh" path="res://scenes/levels/level.tscn" id="1_0bpdh"]
 [ext_resource type="FontFile" uid="uid://ca5lbnt7ooy0c" path="res://assets/fonts/PixelArmy.ttf" id="2_2ckv8"]
 [ext_resource type="Texture2D" uid="uid://bdd0hwohyx6on" path="res://assets/textures/Blueprint Sketches-2.png" id="3_2fbfq"]
 [ext_resource type="Texture2D" uid="uid://drdajpptwhcwq" path="res://assets/textures/Blueprint Borders-1.png.png" id="3_8gwij"]
@@ -78,6 +78,7 @@ text = "Back to levels"
 label_settings = SubResource("LabelSettings_2fbfq")
 
 [node name="Borders" type="TextureRect" parent="." unique_id=1284332001]
+top_level = true
 layout_mode = 0
 offset_right = 1024.0
 offset_bottom = 768.0

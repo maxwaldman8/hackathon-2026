@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bcg2nha56n66e"]
 
-[ext_resource type="Script" uid="uid://cubh5fwvtc3da" path="res://scripts/loading_screen.gd" id="1_ep5rh"]
+[ext_resource type="Script" path="res://scripts/loading_screen.gd" id="1_ep5rh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbxp4"]
 bg_color = Color(0.0862745, 0.0901961, 0.101961, 1)
@@ -180,6 +180,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_kbxp4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1512382900]
 libraries/ = SubResource("AnimationLibrary_pi15l")
+speed_scale = 0.35
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1953065600]
 stream = SubResource("AudioStream_oobaa")
