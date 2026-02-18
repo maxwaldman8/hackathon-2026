@@ -10,6 +10,18 @@
 [ext_resource type="Texture2D" uid="uid://ckao615thgvex" path="res://assets/textures/Blueprints for Hub/sprite_1.png" id="7_v51tr"]
 [ext_resource type="Texture2D" uid="uid://davfdvhy3t1pg" path="res://assets/textures/Hub Art.png" id="8_ttnrp"]
 [ext_resource type="Texture2D" uid="uid://ddu07cybii3yi" path="res://assets/textures/Blueprints for Hub/sprite_2.png" id="8_v51tr"]
+[ext_resource type="Texture2D" uid="uid://cbvst6cjrtspt" path="res://assets/textures/ALL OBJECTS/1x1 Objects2.png" id="9_08dx1"]
+[ext_resource type="Texture2D" uid="uid://dn5ees8p55yuj" path="res://assets/textures/ALL OBJECTS/1x3 Objects1.png" id="9_otmef"]
+[ext_resource type="Texture2D" uid="uid://c12iqqqwl6spj" path="res://assets/textures/ALL OBJECTS/1x3 Objects2.png" id="10_lbg0l"]
+[ext_resource type="Texture2D" uid="uid://kvgkcjpcrqwi" path="res://assets/textures/ALL OBJECTS/2x2 Objects1.png" id="12_yjpty"]
+[ext_resource type="Texture2D" uid="uid://daml3ip66apxy" path="res://assets/textures/ALL OBJECTS/1x1 Objects1.png" id="13_agyhy"]
+[ext_resource type="Texture2D" uid="uid://d2yjhjhwsgsj7" path="res://assets/textures/ALL OBJECTS/2x2 Objects3.png" id="14_63ngt"]
+[ext_resource type="Texture2D" uid="uid://dda812ne5nr3y" path="res://assets/textures/ALL OBJECTS/1x1 Objects5.png" id="15_p4jet"]
+[ext_resource type="Texture2D" uid="uid://d1sqmdgujry4d" path="res://assets/textures/ALL OBJECTS/1x1 Objects3.png" id="16_ttxmp"]
+[ext_resource type="Texture2D" uid="uid://iu7iieyg4qxj" path="res://assets/textures/ALL OBJECTS/1x3 Objects3.png" id="17_vuphw"]
+[ext_resource type="Texture2D" uid="uid://blv7jw3yysgci" path="res://assets/textures/ALL OBJECTS/2x2 Objects2.png" id="18_smch6"]
+[ext_resource type="Texture2D" uid="uid://bdtte75bux0wg" path="res://assets/textures/ALL OBJECTS/1x1 Objects6.png" id="20_l4ksf"]
+[ext_resource type="Texture2D" uid="uid://tfm34imit8dp" path="res://assets/textures/ALL OBJECTS/1x1 Objects4.png" id="21_yjpty"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_geiq8"]
 texture = ExtResource("5_b2a8j")
@@ -218,121 +230,6 @@ theme_override_font_sizes/font_size = 32
 text = "BLUEPRINT: Final Challenge"
 label_settings = SubResource("LabelSettings_b2a8j")
 
-[node name="FinishedLevels" type="Control" parent="." unique_id=787337304]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Couch1" type="TextureRect" parent="FinishedLevels" unique_id=1423488940]
-layout_mode = 0
-offset_left = 1088.0
-offset_top = 2048.0
-offset_right = 1091.0
-offset_bottom = 2050.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch2" type="TextureRect" parent="FinishedLevels" unique_id=395089186]
-layout_mode = 0
-offset_left = 1088.0
-offset_top = 1536.0
-offset_right = 1091.0
-offset_bottom = 1538.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch3" type="TextureRect" parent="FinishedLevels" unique_id=171768832]
-layout_mode = 0
-offset_left = 1344.0
-offset_top = 1664.0
-offset_right = 1347.0
-offset_bottom = 1666.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch4" type="TextureRect" parent="FinishedLevels" unique_id=63242740]
-layout_mode = 0
-offset_left = 1472.0
-offset_top = 1280.0
-offset_right = 1475.0
-offset_bottom = 1282.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch5" type="TextureRect" parent="FinishedLevels" unique_id=1684588101]
-layout_mode = 0
-offset_left = 2688.0
-offset_top = 1536.0
-offset_right = 2691.0
-offset_bottom = 1538.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch6" type="TextureRect" parent="FinishedLevels" unique_id=153921747]
-layout_mode = 0
-offset_left = 2688.0
-offset_top = 1408.0
-offset_right = 2691.0
-offset_bottom = 1410.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch7" type="TextureRect" parent="FinishedLevels" unique_id=446339426]
-layout_mode = 0
-offset_left = 2496.0
-offset_top = 1536.0
-offset_right = 2499.0
-offset_bottom = 1538.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch8" type="TextureRect" parent="FinishedLevels" unique_id=867738036]
-layout_mode = 0
-offset_left = 2304.0
-offset_top = 832.0
-offset_right = 2307.0
-offset_bottom = 834.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch9" type="TextureRect" parent="FinishedLevels" unique_id=1763239572]
-layout_mode = 0
-offset_left = 2112.0
-offset_top = 640.0
-offset_right = 2115.0
-offset_bottom = 642.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch10" type="TextureRect" parent="FinishedLevels" unique_id=281678640]
-layout_mode = 0
-offset_left = 2560.0
-offset_top = 640.0
-offset_right = 2563.0
-offset_bottom = 642.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch11" type="TextureRect" parent="FinishedLevels" unique_id=565454744]
-layout_mode = 0
-offset_left = 1728.0
-offset_top = 512.0
-offset_right = 1731.0
-offset_bottom = 514.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
-[node name="Couch12" type="TextureRect" parent="FinishedLevels" unique_id=1288440466]
-layout_mode = 0
-offset_left = 320.0
-offset_top = 192.0
-offset_right = 323.0
-offset_bottom = 194.0
-scale = Vector2(64, 64)
-texture = ExtResource("6_ny5ni")
-
 [node name="Blueprints" type="Control" parent="." unique_id=2088931824]
 layout_mode = 3
 anchors_preset = 0
@@ -416,8 +313,8 @@ layout_mode = 0
 offset_left = 2560.0
 offset_top = 704.0
 offset_right = 2752.0
-offset_bottom = 832.0
-texture = ExtResource("7_v51tr")
+offset_bottom = 768.0
+texture = ExtResource("9_otmef")
 
 [node name="Print11" type="TextureRect" parent="Blueprints" unique_id=1622719945]
 layout_mode = 0
@@ -434,6 +331,120 @@ offset_top = 192.0
 offset_right = 512.0
 offset_bottom = 320.0
 texture = ExtResource("6_ttnrp")
+
+[node name="FinishedLevels" type="Control" parent="." unique_id=787337304]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Couch1" type="TextureRect" parent="FinishedLevels" unique_id=1423488940]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 2048.0
+offset_right = 1091.0
+offset_bottom = 2050.0
+scale = Vector2(4, 4)
+texture = ExtResource("9_08dx1")
+
+[node name="Couch2" type="TextureRect" parent="FinishedLevels" unique_id=395089186]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 1536.0
+offset_right = 1091.0
+offset_bottom = 1538.0
+scale = Vector2(4, 4)
+texture = ExtResource("10_lbg0l")
+
+[node name="Couch3" type="TextureRect" parent="FinishedLevels" unique_id=171768832]
+layout_mode = 0
+offset_left = 1344.0
+offset_top = 1664.0
+offset_right = 1347.0
+offset_bottom = 1666.0
+scale = Vector2(4, 4)
+texture = ExtResource("12_yjpty")
+
+[node name="Couch4" type="TextureRect" parent="FinishedLevels" unique_id=63242740]
+layout_mode = 0
+offset_left = 1472.0
+offset_top = 1280.0
+offset_right = 1475.0
+offset_bottom = 1282.0
+scale = Vector2(4, 4)
+texture = ExtResource("13_agyhy")
+
+[node name="Couch5" type="TextureRect" parent="FinishedLevels" unique_id=1684588101]
+layout_mode = 0
+offset_left = 2688.0
+offset_top = 1536.0
+offset_right = 2691.0
+offset_bottom = 1538.0
+scale = Vector2(4, 4)
+texture = ExtResource("14_63ngt")
+
+[node name="Couch6" type="TextureRect" parent="FinishedLevels" unique_id=153921747]
+layout_mode = 0
+offset_left = 2688.0
+offset_top = 1408.0
+offset_right = 2691.0
+offset_bottom = 1410.0
+scale = Vector2(4, 4)
+texture = ExtResource("15_p4jet")
+
+[node name="Couch7" type="TextureRect" parent="FinishedLevels" unique_id=446339426]
+layout_mode = 0
+offset_left = 2496.0
+offset_top = 1536.0
+offset_right = 2499.0
+offset_bottom = 1538.0
+scale = Vector2(4, 4)
+texture = ExtResource("16_ttxmp")
+
+[node name="Couch8" type="TextureRect" parent="FinishedLevels" unique_id=867738036]
+layout_mode = 0
+offset_left = 2304.0
+offset_top = 768.0
+offset_right = 2352.0
+offset_bottom = 816.0
+scale = Vector2(4, 4)
+texture = ExtResource("17_vuphw")
+
+[node name="Couch9" type="TextureRect" parent="FinishedLevels" unique_id=1763239572]
+layout_mode = 0
+offset_left = 2112.0
+offset_top = 640.0
+offset_right = 2115.0
+offset_bottom = 642.0
+scale = Vector2(4, 4)
+texture = ExtResource("18_smch6")
+
+[node name="Couch10" type="TextureRect" parent="FinishedLevels" unique_id=281678640]
+layout_mode = 0
+offset_left = 2560.0
+offset_top = 640.0
+offset_right = 2563.0
+offset_bottom = 642.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_ny5ni")
+
+[node name="Couch11" type="TextureRect" parent="FinishedLevels" unique_id=565454744]
+layout_mode = 0
+offset_left = 1728.0
+offset_top = 446.0
+offset_right = 1744.0
+offset_bottom = 494.0
+scale = Vector2(4, 4)
+texture = ExtResource("20_l4ksf")
+
+[node name="Couch12" type="TextureRect" parent="FinishedLevels" unique_id=1288440466]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 323.0
+offset_bottom = 194.0
+scale = Vector2(4, 4)
+texture = ExtResource("21_yjpty")
 
 [node name="Player" parent="." unique_id=1501448831 node_paths=PackedStringArray("level") instance=ExtResource("3_ttnrp")]
 position = Vector2(192, 192)
