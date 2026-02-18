@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	$Sprite2D.global_scale = 2 * Vector2(min(scale.x, scale.y), min(scale.x, scale.y)) * 2
 	#$Sprite2D.texture = load("res://assets/textures/Face1.png")
 	if level.is_main:
-		$ColorRect.color = Color("#999999")
+		$ColorRect.color = Color("#d37996")
 		$Sprite2D.modulate = Color("#ffffff")
 	else:
 		$ColorRect.color = Color("#ffffffdd")
