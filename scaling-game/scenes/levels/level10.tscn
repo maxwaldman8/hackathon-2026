@@ -1,10 +1,11 @@
-[gd_scene format=4 uid="uid://brnw6bu3ljh50"]
+[gd_scene format=4 uid="uid://b30v8tqa1cto7"]
 
 [ext_resource type="Script" uid="uid://7oh5jn0m8563" path="res://scripts/level.gd" id="1_mdxo6"]
 [ext_resource type="Texture2D" uid="uid://bfdborgmtbh3" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="2_tb8ci"]
 [ext_resource type="PackedScene" uid="uid://5oi8emxl0rfu" path="res://scenes/player.tscn" id="3_ujtvf"]
 [ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="4_h1dae"]
 [ext_resource type="PackedScene" uid="uid://cn2nrf7j4xgq7" path="res://scenes/box.tscn" id="5_infop"]
+[ext_resource type="Texture2D" uid="uid://drdajpptwhcwq" path="res://assets/textures/Blueprint Borders-1.png.png" id="6_tb8ci"]
 
 [node name="Level4" type="Node2D" unique_id=854432131 node_paths=PackedStringArray("player")]
 script = ExtResource("1_mdxo6")
@@ -43,3 +44,9 @@ position = Vector2(640, 256)
 
 [node name="Box6" parent="Boxes" unique_id=138990818 instance=ExtResource("5_infop")]
 position = Vector2(704, 256)
+
+[node name="Borders" type="TextureRect" parent="." unique_id=1959361844]
+offset_right = 1024.0
+offset_bottom = 768.0
+texture = ExtResource("6_tb8ci")
+stretch_mode = 1
