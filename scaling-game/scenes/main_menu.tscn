@@ -1,9 +1,11 @@
-[gd_scene format=3 uid="uid://m2nruhqtafwc"]
+[gd_scene format=4 uid="uid://buhfkwtk6aaga"]
 
 [ext_resource type="Script" uid="uid://cjhsvo8ad6whf" path="res://scripts/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Texture2D" uid="uid://b3w8y7ss2qae7" path="res://assets/textures/Face1.png" id="2_bqqt6"]
 [ext_resource type="FontFile" uid="uid://ca5lbnt7ooy0c" path="res://assets/fonts/PixelArmy.ttf" id="2_wu84c"]
-[ext_resource type="Texture2D" uid="uid://bw68xrlwfkybh" path="res://assets/textures/Face2.png" id="3_wu84c"]
+[ext_resource type="Texture2D" uid="uid://bk1vn5oryqlx5" path="res://assets/textures/Concrete Character Face.png.png" id="3_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="4_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://drdajpptwhcwq" path="res://assets/textures/Blueprint Borders-1.png.png" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://bfdborgmtbh3" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="5_oa1go"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vue75"]
 font = ExtResource("2_wu84c")
@@ -23,6 +25,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
+[node name="Background" type="TextureRect" parent="." unique_id=1068560451]
+layout_mode = 0
+offset_left = 1.5258789e-05
+offset_right = 1023.99994
+offset_bottom = 768.0
+texture = ExtResource("5_oa1go")
+stretch_mode = 1
+
+[node name="Borders" type="TextureRect" parent="." unique_id=931264577]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+texture = ExtResource("5_8ln24")
+stretch_mode = 1
+
+[node name="Grid" parent="." unique_id=1908360980 instance=ExtResource("4_rtw2f")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAAAAUAAAAAAAAAAQAAAAQAAAAAAAAAAQAAAAMAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAEAAAAAAAAAAQAAAAYAAAAAAAAAAQAAAAcAAAAAAAAAAQAAAAgAAAAAAAAAAQAAAAkAAAAAAAAAAQAAAAoAAAAAAAAAAQAAAAsAAAAAAAAAAQABAAsAAAAAAAAAAQACAAsAAAAAAAAAAQADAAsAAAAAAAAAAQAEAAsAAAAAAAAAAQAFAAsAAAAAAAAAAQAGAAsAAAAAAAAAAQAHAAsAAAAAAAAAAQAIAAsAAAAAAAAAAQAJAAsAAAAAAAAAAQAKAAsAAAAAAAAAAQALAAsAAAAAAAAAAQAMAAsAAAAAAAAAAQANAAsAAAAAAAAAAQAOAAsAAAAAAAAAAQAPAAsAAAAAAAAAAQAPAAoAAAAAAAAAAQAPAAkAAAAAAAAAAQAPAAgAAAAAAAAAAQAPAAcAAAAAAAAAAQAPAAYAAAAAAAAAAQAPAAUAAAAAAAAAAQAPAAQAAAAAAAAAAQAPAAMAAAAAAAAAAQAPAAIAAAAAAAAAAQAPAAEAAAAAAAAAAQAPAAAAAAAAAAAAAQAOAAAAAAAAAAAAAQANAAAAAAAAAAAAAQAMAAAAAAAAAAAAAQALAAAAAAAAAAAAAQAKAAAAAAAAAAAAAQAJAAAAAAAAAAAAAQAIAAAAAAAAAAAAAQAHAAAAAAAAAAAAAQAGAAAAAAAAAAAAAQA=")
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=901440304]
 z_index = -1
 layout_mode = 1
@@ -39,6 +59,8 @@ anchors_preset = -1
 anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 0.4
+offset_top = 24.599998
+offset_bottom = 24.600006
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Concrete Carpenter"
@@ -94,8 +116,8 @@ color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="Face1" type="Sprite2D" parent="ColorRect2" unique_id=292520557]
 position = Vector2(96, 96)
-scale = Vector2(6, 6)
-texture = ExtResource("2_bqqt6")
+scale = Vector2(12, 12)
+texture = ExtResource("3_rtw2f")
 
 [node name="ColorRect3" type="ColorRect" parent="." unique_id=1669026079]
 layout_mode = 0
@@ -107,9 +129,10 @@ rotation = -0.66377103
 color = Color(1, 1, 1, 0.53333336)
 
 [node name="Face1" type="Sprite2D" parent="ColorRect3" unique_id=932219630]
+modulate = Color(0.34901962, 0.5294118, 0.7764706, 1)
 position = Vector2(97.26625, 96.39124)
-scale = Vector2(6, 6)
-texture = ExtResource("3_wu84c")
+scale = Vector2(12, 12)
+texture = ExtResource("3_rtw2f")
 
 [connection signal="pressed" from="Buttons/Play Button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Buttons/Credits Button" to="." method="_on_credits_button_pressed"]

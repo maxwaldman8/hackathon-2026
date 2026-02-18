@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://5oi8emxl0rfu"]
 
 [ext_resource type="Script" uid="uid://ubxwxjhdoyg8" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="Texture2D" uid="uid://b3w8y7ss2qae7" path="res://assets/textures/Face1.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bk1vn5oryqlx5" path="res://assets/textures/Concrete Character Face.png.png" id="2_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://chfkwdqsp3nm6" path="res://assets/music/PlayerMove.wav" id="3_qhqgy"]
 
 [node name="Player" type="Node2D" unique_id=1501448831]
@@ -16,7 +16,7 @@ color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1811824797]
 position = Vector2(32, 32)
-scale = Vector2(2, 2)
+scale = Vector2(4, 4)
 texture = ExtResource("2_qhqgy")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=205310544]
