@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://g1eu8tu4wguk" path="res://scenes/levels/level.tscn" id="1_0bpdh"]
 [ext_resource type="FontFile" uid="uid://ca5lbnt7ooy0c" path="res://assets/fonts/PixelArmy.ttf" id="2_2ckv8"]
 [ext_resource type="Texture2D" uid="uid://bdd0hwohyx6on" path="res://assets/textures/Blueprint Sketches-2.png" id="3_2fbfq"]
+[ext_resource type="Texture2D" uid="uid://drdajpptwhcwq" path="res://assets/textures/Blueprint Borders-1.png.png" id="3_8gwij"]
 [ext_resource type="Texture2D" uid="uid://tr33qm5awuly" path="res://assets/textures/Blueprint Sketches-1.png" id="4_8gwij"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0ctdu"]
@@ -27,18 +28,42 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 24.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "
-
-CREDITS:
-
-Level Designer AND ART: Boyan Manolov
+text = "Level Designer AND ART: Boyan Manolov
 Art and Programming: Kai Nantamanasikarn
 Music and Programming: Max Waldman
-
-Made In Godot
 "
+label_settings = SubResource("LabelSettings_0ctdu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="." unique_id=2019692034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Credits:"
+label_settings = SubResource("LabelSettings_0ctdu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="." unique_id=1533895567]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 99.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Made in Godot"
 label_settings = SubResource("LabelSettings_0ctdu")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -51,6 +76,13 @@ offset_right = 226.0
 offset_bottom = 175.0
 text = "Back to levels"
 label_settings = SubResource("LabelSettings_2fbfq")
+
+[node name="Borders" type="TextureRect" parent="." unique_id=1284332001]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+texture = ExtResource("3_8gwij")
+stretch_mode = 1
 
 [node name="BlueprintSketches2" type="Sprite2D" parent="." unique_id=1810192965]
 position = Vector2(208, 568)
