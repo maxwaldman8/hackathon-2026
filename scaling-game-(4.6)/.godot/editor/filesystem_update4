@@ -1,0 +1,5 @@
+res://scenes/levels/hub_level.tscn
+res://scripts/level.gd
+res://scripts/saved_level_info.gd
+res://scenes/credits.tscn
+res://scenes/main_menu.tscn

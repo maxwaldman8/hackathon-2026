@@ -1,0 +1,145 @@
+[gd_scene format=4 uid="uid://buhfkwtk6aaga"]
+
+[ext_resource type="Script" uid="uid://cjhsvo8ad6whf" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://ca5lbnt7ooy0c" path="res://assets/fonts/PixelArmy.ttf" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://bk1vn5oryqlx5" path="res://assets/textures/Concrete Character Face.png.png" id="3_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://d3ohocbnhd2fo" path="res://scenes/grid.tscn" id="4_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://drdajpptwhcwq" path="res://assets/textures/Blueprint Borders-1.png.png" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://bfdborgmtbh3" path="res://assets/textures/Blueprint Tilemap/sprite_0.png" id="5_oa1go"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vue75"]
+font = ExtResource("2_wu84c")
+font_size = 70
+font_color = Color(1, 1, 1, 0.53333336)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
+bg_color = Color(1, 1, 1, 0.5882353)
+
+[node name="MainMenu" type="Control" unique_id=2078500379]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1068560451]
+layout_mode = 0
+offset_left = 1.5258789e-05
+offset_right = 1023.99994
+offset_bottom = 768.0
+texture = ExtResource("5_oa1go")
+stretch_mode = 1
+
+[node name="Grid" parent="." unique_id=1908360980 instance=ExtResource("4_rtw2f")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAAAAUAAAAAAAAAAQAAAAQAAAAAAAAAAQAAAAMAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAEAAAAAAAAAAQAAAAYAAAAAAAAAAQAAAAcAAAAAAAAAAQAAAAgAAAAAAAAAAQAAAAkAAAAAAAAAAQAAAAoAAAAAAAAAAQAAAAsAAAAAAAAAAQABAAsAAAAAAAAAAQACAAsAAAAAAAAAAQADAAsAAAAAAAAAAQAEAAsAAAAAAAAAAQAFAAsAAAAAAAAAAQAGAAsAAAAAAAAAAQAHAAsAAAAAAAAAAQAIAAsAAAAAAAAAAQAJAAsAAAAAAAAAAQAKAAsAAAAAAAAAAQALAAsAAAAAAAAAAQAMAAsAAAAAAAAAAQANAAsAAAAAAAAAAQAOAAsAAAAAAAAAAQAPAAsAAAAAAAAAAQAPAAoAAAAAAAAAAQAPAAkAAAAAAAAAAQAPAAgAAAAAAAAAAQAPAAcAAAAAAAAAAQAPAAYAAAAAAAAAAQAPAAUAAAAAAAAAAQAPAAQAAAAAAAAAAQAPAAMAAAAAAAAAAQAPAAIAAAAAAAAAAQAPAAEAAAAAAAAAAQAPAAAAAAAAAAAAAQAOAAAAAAAAAAAAAQANAAAAAAAAAAAAAQAMAAAAAAAAAAAAAQALAAAAAAAAAAAAAQAKAAAAAAAAAAAAAQAJAAAAAAAAAAAAAQAIAAAAAAAAAAAAAQAHAAAAAAAAAAAAAQAGAAAAAAAAAAAAAQABAAoAAAAAAAAAAwAOAAoAAAAAAAAAAwABAAEAAAAAAAAAAwAOAAEAAAAAAAAAAwA=")
+
+[node name="Borders" type="TextureRect" parent="." unique_id=931264577]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+texture = ExtResource("5_8ln24")
+stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=901440304]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.34901962, 0.5294118, 0.7764706, 1)
+
+[node name="Title" type="Label" parent="." unique_id=922141614]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.4
+offset_top = 24.599998
+offset_bottom = 24.600006
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "ELASTIC PINK PLASTIC"
+label_settings = SubResource("LabelSettings_vue75")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1128144773]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.4
+anchor_right = 0.7
+anchor_bottom = 0.8
+offset_left = 13.799988
+offset_top = 13.799988
+offset_right = -13.799988
+offset_bottom = 24.599976
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 66
+alignment = 1
+
+[node name="Play Button" type="Button" parent="Buttons" unique_id=567333833]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rtw2f")
+text = "PLAY"
+
+[node name="Credits Button" type="Button" parent="Buttons" unique_id=726243967]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rtw2f")
+text = "CREDITS"
+
+[node name="Quit Button" type="Button" parent="Buttons" unique_id=612965491]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_wu84c")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_rtw2f")
+text = "QUIT"
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1468535017]
+layout_mode = 0
+offset_left = 823.9999
+offset_top = 349.0
+offset_right = 1015.9999
+offset_bottom = 541.0
+rotation = 0.43082473
+color = Color(0.82817954, 0.47552627, 0.58669806, 1)
+
+[node name="Face1" type="Sprite2D" parent="ColorRect2" unique_id=292520557]
+position = Vector2(96, 96)
+scale = Vector2(12, 12)
+texture = ExtResource("3_rtw2f")
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1669026079]
+layout_mode = 0
+offset_left = 1.5258789e-05
+offset_top = 461.00003
+offset_right = 192.00002
+offset_bottom = 653.0
+rotation = -0.66377103
+color = Color(1, 1, 1, 0.53333336)
+
+[node name="Face1" type="Sprite2D" parent="ColorRect3" unique_id=932219630]
+modulate = Color(0.34901962, 0.5294118, 0.7764706, 1)
+position = Vector2(97.26625, 96.39124)
+scale = Vector2(12, 12)
+texture = ExtResource("3_rtw2f")
+
+[connection signal="pressed" from="Buttons/Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Buttons/Credits Button" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Buttons/Quit Button" to="." method="_on_quit_button_pressed"]
